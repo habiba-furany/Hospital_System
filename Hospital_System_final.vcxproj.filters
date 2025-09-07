@@ -66,6 +66,6 @@
   <ItemGroup>
     <Text Include="Patients.txt" />
     <Text Include="MedicalHistory.txt" />
-    <Text Include="Employee.txt" />
+    <Text Include="Employees.txt" />
   </ItemGroup>
 </Project>

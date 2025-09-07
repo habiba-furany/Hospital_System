@@ -7,7 +7,9 @@ void hospital::addPatient() {
     char gender;
     cout << "Enter information" << endl;
     cout << "Name : ";
-    cin >> name;
+    /*cin >> name;*/
+    cin.ignore(); // Clear input buffer
+    getline(cin, name);
     cout << "Age : ";
     cin >> age;
     cout << "ID : ";
@@ -21,18 +23,18 @@ void hospital::addPatient() {
     p.setGender(gender);
     // Assign patient to a doctor based on specialization
 
-    cout << "which clinic do you want to assign the patient to? ";
-    cout << "1. ????? (Cardiology)\n";
-    cout << "2. ??????? (Neurology)\n";
-    cout << "3. ?????? (Orthopedics)\n";
-    cout << "4. ??????? (Pediatrics)\n";
-    cout << "5. ??????? (Dermatology)\n";
-    cout << "6. ?????? ?????? (Gastroenterology)\n";
-    cout << "7. ?????? (Radiology)\n";
-    cout << "8. ????? (Nephrology)\n";
-    cout << "9. ????? ????? ?????? (Cardiothoracic Surgery)\n";
-    cout << "10. ?????? (Ophthalmology)\n";
-    cout << "11. ???? ?????? (Psychiatry)\n";
+    cout << "which clinic do you want to assign the patient to? "<<endl;
+    cout << "1.  (Cardiology)\n";
+    cout << "2.  (Neurology)\n";
+    cout << "3.  (Orthopedics)\n";
+    cout << "4.  (Pediatrics)\n";
+    cout << "5.  (Dermatology)\n";
+    cout << "6.  (Gastroenterology)\n";
+    cout << "7.  (Radiology)\n";
+    cout << "8.  (Nephrology)\n";
+    cout << "9.  (Cardiothoracic Surgery)\n";
+    cout << "10. (Ophthalmology)\n";
+    cout << "11. (Psychiatry)\n";
 
     cout << "Enter your choice (1-11): ";
     int choice;
@@ -93,15 +95,32 @@ void hospital::addDoctor() {
     double salary;
     char gender;
     cout << "Enter doctor's name: ";
-    cin >> name;
+    cin.ignore(); 
+    getline(cin, name);
     cout << "Enter doctor's ID: ";
     cin >> id;
     cout << "Enter doctor's Age: ";
     cin >> age;
     cout << "Enter doctor's Gender (M/F): ";
     cin >> gender;
-    cout << "Enter doctor's specialization: ";
-    cin >> specialization;
+    cout << "Enter doctor's specialization: " << endl;
+
+    for (int i = 0; i < specializations.size(); i++) {
+        cout << i + 1 << ". " << specializations[i] << endl;
+    }
+
+    int specChoice;
+    cout << "Enter your choice (1-" << specializations.size() << "): ";
+    cin >> specChoice;
+
+    if (specChoice < 1 || specChoice > specializations.size()) {
+        cout << "Invalid choice. Using default specialization (General)." << endl;
+        specialization = "General";
+    }
+    else {
+        specialization = specializations[specChoice - 1];
+    }
+    
     cout << "Enter doctor's salary: ";
     cin >> salary;
 
@@ -124,7 +143,8 @@ void hospital::addStaff() {
     double salary;
     char gender;
     cout << "Enter staff's name: ";
-    cin >> name;
+    cin.ignore(); 
+    getline(cin, name);
     cout << "Enter staff's ID: ";
     cin >> id;
     cout << "Enter staff's Age: ";
@@ -132,7 +152,8 @@ void hospital::addStaff() {
     cout << "Enter staff's Gender (M/F): ";
     cin >> gender;
     cout << "Enter staff's Position: ";
-    cin >> position;
+    cin.ignore(); 
+    getline(cin, position);
     cout << "Enter staff's salary: ";
     cin >> salary;
 

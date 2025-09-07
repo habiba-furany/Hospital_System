@@ -146,7 +146,7 @@
     <ClInclude Include="Staff.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Employee.txt" />
+    <Text Include="Employees.txt" />
     <Text Include="MedicalHistory.txt" />
     <Text Include="Patients.txt" />
   </ItemGroup>
