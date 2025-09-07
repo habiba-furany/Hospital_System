@@ -47,7 +47,6 @@ Patient Doctor::dequeue() {
     }
     else {
         Patient patient = patient_queue.front();
-
         patient_queue.pop();
         patient_number--;
         return patient;

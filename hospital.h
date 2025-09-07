@@ -34,10 +34,8 @@ public:
 	void searchEmployee(int id);
 	void searchPatient(int id);
 
-	// Remove a person
-	void removePatient(int Doc_ID);
-	void removeEmployee(int emp_ID);
-
+	// Remove a patient from doctor's queue
+	void dequeuePatient(int Doc_ID);
 
 };
 

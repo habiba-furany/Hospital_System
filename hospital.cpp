@@ -44,16 +44,6 @@ void hospital::addPatient() {
         return;
     }
 
-    //// Find a doctor with the matching specialization.....
-    //cout << "Enter your choice (1-11): ";
-    //int choice;
-    //cin >> choice;
-
-    ////check if choice is valid
-    //if (choice < 1 || choice > 11) {
-    //    cout << "Invalid choice. Please select a valid clinic." << endl;
-    //    return;
-    //}
 
     string selectedSpec = specializations[choice - 1];
 
@@ -129,7 +119,7 @@ void hospital::addDoctor() {
 }
 
 void hospital::addStaff() {
-    string name;
+    string name , position;
     int id, age;
     double salary;
     char gender;
@@ -141,6 +131,8 @@ void hospital::addStaff() {
     cin >> age;
     cout << "Enter staff's Gender (M/F): ";
     cin >> gender;
+    cout << "Enter staff's Position: ";
+    cin >> position;
     cout << "Enter staff's salary: ";
     cin >> salary;
 
@@ -150,6 +142,7 @@ void hospital::addStaff() {
     s->setId(id);
     s->setAge(age);
     s->setSalary(salary);
+    s->setPosition(position);
     s->setGender(gender);
 
     dataManager.listOfStaff.push_back(s);
@@ -397,17 +390,16 @@ void hospital::searchEmployee(int id)
     {
         if (emp->getId() == id)
         {
-            cout << "Staff found: " << emp->getName() << endl;
+            cout << "Employee found: " << emp->getName() << endl;
             emp->display();
             return;
         }
     }
-    cout << "Staff not found." << endl;
+    cout << "Employee not found." << endl;
 }
 
 // Remove a patient
-
-void hospital::removePatient(int Doc_ID)
+void hospital::dequeuePatient(int Doc_ID)
 {
     dataManager.loadData();
     Doctor* doctor = nullptr;
@@ -422,11 +414,6 @@ void hospital::removePatient(int Doc_ID)
     Patient patient = doctor->dequeue();
     patient.addReport(patient, doctor);
 
-}
-
-// remove employee...
-void hospital::removeEmployee(int emp_ID)
-{
 }
 
 
