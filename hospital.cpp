@@ -134,6 +134,7 @@ void hospital::addDoctor() {
 
     dataManager.listOfDoctors.push_back(d);
     dataManager.saveData();
+    cout << "Doctor added succesfully" << endl;
 }
 
 void hospital::addStaff() {
@@ -167,6 +168,7 @@ void hospital::addStaff() {
 
     dataManager.listOfStaff.push_back(s);
     dataManager.saveData();
+    cout << "Staff added Succesfully" << endl;
 }
 
 
@@ -220,6 +222,7 @@ void hospital::updatePatient(int id)
                 cout << "Invalid choice." << endl;
             }
             dataManager.saveData();
+            cout << "Patient updated succesfully" << endl;
             return;
         }
     }
@@ -299,6 +302,7 @@ void hospital::updateDoctor(int id)
                 cout << "Invalid choice." << endl;
             }
             dataManager.saveData();
+            cout << "Doctor updated succesfully" << endl;
             return;
         }
     }
@@ -377,6 +381,7 @@ void hospital::updateStaff(int id)
                 cout << "Invalid choice." << endl;
             }
             dataManager.saveData();
+            cout << "Staff updated succesfully" << endl;
             return;
         }
     }
