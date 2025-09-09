@@ -16,25 +16,24 @@ void hospital::addPatient() {
     cin >> id;
     cout << "Gender (M/F) : ";
     cin >> gender;
-    Patient p;
-    p.setName(name);
-    p.setAge(age);
-    p.setId(id);
-    p.setGender(gender);
+    patient->setName(name);
+    patient->setAge(age);
+    patient->setId(id);
+    patient->setGender(gender);
     // Assign patient to a doctor based on specialization
 
     cout << "which clinic do you want to assign the patient to? "<<endl;
-    cout << "1.  (Cardiology)\n";
-    cout << "2.  (Neurology)\n";
-    cout << "3.  (Orthopedics)\n";
-    cout << "4.  (Pediatrics)\n";
-    cout << "5.  (Dermatology)\n";
-    cout << "6.  (Gastroenterology)\n";
-    cout << "7.  (Radiology)\n";
-    cout << "8.  (Nephrology)\n";
-    cout << "9.  (Cardiothoracic Surgery)\n";
-    cout << "10. (Ophthalmology)\n";
-    cout << "11. (Psychiatry)\n";
+    cout << "1.(Cardiology)\n";
+    cout << "2.(Neurology)\n";
+    cout << "3.(Orthopedics)\n";
+    cout << "4.(Pediatrics)\n";
+    cout << "5.(Dermatology)\n";
+    cout << "6.(Gastroenterology)\n";
+    cout << "7.(Radiology)\n";
+    cout << "8.(Nephrology)\n";
+    cout << "9.(Cardiothoracic Surgery)\n";
+    cout << "10.(Ophthalmology)\n";
+    cout << "11.(Psychiatry)\n";
 
     cout << "Enter your choice (1-11): ";
     int choice;
@@ -83,9 +82,9 @@ void hospital::addPatient() {
         << " (" << reqDoctor->getSpecialization() << ")" << endl;
 
     //add patient to doctor's queue.....
-    reqDoctor->enqueue(p);
+    reqDoctor->enqueue(patient);
 
-    dataManager.listOfPatient.push_back(p);
+    dataManager.listOfPatient.push_back(patient);
     dataManager.saveData();
 }
 
@@ -174,10 +173,9 @@ void hospital::addStaff() {
 // update a person .....
 void hospital::updatePatient(int id)
 {
-    dataManager.loadData();
     for (auto& patient : dataManager.listOfPatient)
     {
-        if (patient.getId() == id)
+        if (patient->getId() == id)
         {
             int choice;
             cout << "Updating information for patient ID: " << id << endl;
@@ -193,28 +191,28 @@ void hospital::updatePatient(int id)
             case 1:
             {
                 string name;
-                cout << "Enter new name (current: " << patient.getName() << "): ";
+                cout << "Enter new name (current: " << patient->getName() << "): ";
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
                 std::getline(cin, name);
-                patient.setName(name);
+                patient->setName(name);
                 cout << "Name updated successfully." << endl;
                 break;
             }
             case 2:
             {
                 int age;
-                cout << "Enter new age (current: " << patient.getAge() << "): ";
+                cout << "Enter new age (current: " << patient->getAge() << "): ";
                 cin >> age;
-                patient.setAge(age);
+                patient->setAge(age);
                 cout << "Age updated successfully." << endl;
                 break;
             }
             case 3:
             {
                 char gender;
-                cout << "Enter new gender (current: " << patient.getGender() << "): ";
+                cout << "Enter new gender (current: " << patient->getGender() << "): ";
                 cin >> gender;
-                patient.setGender(gender);
+                patient->setGender(gender);
                 cout << "Gender updated successfully." << endl;
                 break;
             }
@@ -233,7 +231,6 @@ void hospital::updatePatient(int id)
 
 void hospital::updateDoctor(int id)
 {
-    dataManager.loadData();
     for (auto& doc : dataManager.listOfDoctors)
     {
         if (doc && doc->getId() == id)
@@ -312,7 +309,6 @@ void hospital::updateDoctor(int id)
 
 void hospital::updateStaff(int id)
 {
-    dataManager.loadData();
     for (auto& staff : dataManager.listOfStaff)
     {
         if (staff && staff->getId() == id)
@@ -390,13 +386,12 @@ void hospital::updateStaff(int id)
 //search for a patient
 void hospital::searchPatient(int id)
 {
-    dataManager.loadData();
     for (const auto& patient : dataManager.listOfPatient)
     {
-        if (patient.getId() == id)
+        if (patient->getId() == id)
         {
-            cout << "Patient found: " << patient.getName() << endl;
-            patient.display();
+            cout << "Patient found: " << patient->getName() << endl;
+            patient->display();
             return;
         }
     }
@@ -422,7 +417,6 @@ void hospital::searchEmployee(int id)
 // Remove a patient
 void hospital::dequeuePatient(int Doc_ID)
 {
-    dataManager.loadData();
     Doctor* doctor = nullptr;
     for (const auto& Doc : dataManager.listOfDoctors)
     {
@@ -432,8 +426,11 @@ void hospital::dequeuePatient(int Doc_ID)
             break;
         }
     }
-    Patient patient = doctor->dequeue();
-    patient.addReport(patient, doctor);
+    Patient* patient = doctor->dequeue();
+    if (patient->getId() == 0)
+        return;
+    else
+    patient->addReport(patient, doctor);
 
 }
 

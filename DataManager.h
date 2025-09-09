@@ -13,7 +13,7 @@ class DataManager {
 public:
 
     // make 3 vectors for patients, doctors, and staff to make it easier to use them in functions......
-    vector<Patient> listOfPatient;
+    vector<Patient*> listOfPatient;
     vector<Doctor*> listOfDoctors;
     vector<Staff*> listOfStaff;
 
@@ -23,5 +23,5 @@ public:
 
     // very important for getting medical history easily
     vector<string> loadMedicalHistory(int patientId);
-    void saveMedicalHistory(int patientId, const vector<string>& history);
+    void saveMedicalHistory(int patientId, string history);
 };

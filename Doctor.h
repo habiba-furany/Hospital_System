@@ -14,7 +14,7 @@ private:
    
     string specialization;
     int patient_number;
-    queue<Patient> patient_queue;
+    queue<Patient*> patient_queue;
 
 public:
     // Constructors & Destructor
@@ -32,8 +32,8 @@ public:
     void display() const override;
 
     // Queue operations
-    void enqueue(Patient patient);
-    Patient dequeue();
+    void enqueue(Patient* patient);
+    Patient* dequeue();
 
     // Appointment scheduling
     // must for organizing patient ....

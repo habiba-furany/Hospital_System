@@ -1,0 +1,14 @@
+3,Amal,25,M
+123,AmalRagba,25,F
+3,Amal,25,M
+123,AmalRagba,25,F
+1589,MAma,18,M
+1332,ee,18,F
+1332,ee,18,F
+1236,amal,17,M
+1236,amal,18,M
+1236,amal,17,F
+159,eman,19,M
+1598,??,14,M
+159,amll,19,M
+159,amll,19,M
