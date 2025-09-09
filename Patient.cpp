@@ -4,9 +4,6 @@
 #include <iostream>
 using namespace std;
 
-Patient::Patient(string name, char gender, int age, int id, string disease)
-    : Person(name, gender, age, id), disease(disease) {
-}
 
 void Patient::setDisease(string d) { disease = d; }
 string Patient::getDisease() const { return disease; }
