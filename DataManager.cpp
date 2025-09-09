@@ -9,6 +9,11 @@
 
 void DataManager::loadData() {
     try {
+        listOfPatient.clear();
+        for (auto d : listOfDoctors) delete d;
+        listOfDoctors.clear();
+        for (auto s : listOfStaff) delete s;
+        listOfStaff.clear();
         // Load patient data
         ifstream inFile("Patients.txt");
         if (!inFile) throw runtime_error("Error opening Patients.txt");
@@ -16,12 +21,12 @@ void DataManager::loadData() {
         string line;
         while (getline(inFile, line)) {
             stringstream ss(line);
-            Patient p;
+            Patient* p = new Patient(*this);
             string temp;
-            getline(ss, temp, ','); p.setId(stoi(temp));
-            getline(ss, temp, ','); p.setName(temp);
-            getline(ss, temp, ','); p.setAge(stoi(temp));
-            getline(ss, temp, ','); p.setGender(temp[0]);
+            getline(ss, temp, ','); p->setId(stoi(temp));
+            getline(ss, temp, ','); p->setName(temp);
+            getline(ss, temp, ','); p->setAge(stoi(temp));
+            getline(ss, temp, ','); p->setGender(temp[0]);
             listOfPatient.push_back(p);
         }
         inFile.close();
@@ -32,7 +37,7 @@ void DataManager::loadData() {
 
         while (getline(EmpFile, line)) {
             stringstream ss(line);
-            string type, temp, name, specialization;
+            string type, temp, name,text;
             int id, age;
             char gender;
             double salary;
@@ -42,21 +47,21 @@ void DataManager::loadData() {
             getline(ss, name, ',');
             getline(ss, temp, ','); age = stoi(temp);
             getline(ss, temp, ','); gender = temp[0];
-            getline(ss, specialization, ',');
+            getline(ss, text, ',');
             getline(ss, temp, ','); salary = stod(temp);
 
             // check the type of employee....
             if (type == "Doctor") {
                 Doctor* d = new Doctor();
                 d->setId(id); d->setName(name); d->setAge(age);
-                d->setGender(gender); d->setSpecialization(specialization);
+                d->setGender(gender); d->setSpecialization(text);
                 d->setSalary(salary);
                 listOfDoctors.push_back(d);
             }
             else if (type == "Staff") {
                 Staff* s = new Staff();
                 s->setId(id); s->setName(name); s->setAge(age);
-                s->setGender(gender); s->setSalary(salary);
+                s->setGender(gender); s->setSalary(salary); s->setPosition(text);
                 listOfStaff.push_back(s);
             }
         }
@@ -74,8 +79,8 @@ void DataManager::saveData() {
         if (!outFile) throw runtime_error("Error opening Patients.txt");
 
         for (const auto& p : listOfPatient) {
-            outFile << p.getId() << "," << p.getName() << ","
-                << p.getAge() << "," << p.getGender() << endl;
+            outFile << p->getId() << "," << p->getName() << ","
+                << p->getAge() << "," << p->getGender() << endl;
         }
         outFile.close();
 
@@ -90,8 +95,8 @@ void DataManager::saveData() {
         }
         for (const auto& s : listOfStaff) {
             EmpFile << "Staff," << s->getId() << "," << s->getName() << ","
-                << s->getAge() << "," << s->getGender() << ",,"
-                << s->getSalary() << endl;
+                << s->getAge() << "," << s->getGender() << ","
+                << s->getPosition() << "," << s->getSalary() << endl;
         }
         EmpFile.close();
 
@@ -122,18 +127,19 @@ vector<string> DataManager::loadMedicalHistory(int patientId) {
         return {};
     }
 
-    vector<string> history;
+    string header = "PatientID:" + to_string(patientId);
     string line;
+    vector<string> history;
+
     while (getline(inFile, line)) {
-        if (line.find(to_string(patientId)) != string::npos) {
-            size_t endPos = line.find("###");
-            if (endPos == string::npos) endPos = line.size();
-
-            string content = line.substr(line.find(",") + 1, endPos - line.find(",") - 1);
-
-            history.push_back(content);
-
-            break;
+        if (line.find(header) != string::npos) {
+            size_t pos = line.find(",");
+            if (pos != string::npos) {
+                history.push_back(line.substr(pos + 1));
+            }
+            else {
+                history.push_back(line);
+            }
         }
     }
 
@@ -142,7 +148,8 @@ vector<string> DataManager::loadMedicalHistory(int patientId) {
 }
 
 
-void DataManager::saveMedicalHistory(int patientId, const vector<string>& newHistory) {
+
+void DataManager::saveMedicalHistory(int patientId, string history) {
     vector<string> allLines;
     ifstream inFile("MedicalHistory.txt");
     if (inFile) {
@@ -153,38 +160,14 @@ void DataManager::saveMedicalHistory(int patientId, const vector<string>& newHis
         inFile.close();
     }
 
-    ofstream outFile("MedicalHistory.txt");
+    ofstream outFile("MedicalHistory.txt", ios::app); 
     if (!outFile) {
         cerr << "Error opening MedicalHistory.txt" << endl;
         return;
     }
 
-    bool patientFound = false;
-    for (auto& line : allLines) {
-        if (line.find("PatientID:" + to_string(patientId)) != string::npos) {
-            patientFound = true;
+    outFile << history << endl;
 
-            size_t pos = line.find("###");
-            if (pos != string::npos) line = line.substr(0, pos);
-
-            for (const auto& entry : newHistory) {
-                line += entry;
-            }
-
-            line += "\n ###";
-        }
-
-        outFile << line << endl;
-    }
-
-    if (!patientFound) {
-        string newLine = to_string(patientId) + "\n";
-        for (const auto& entry : newHistory) {
-            newLine += entry;
-        }
-        newLine += "\n###";
-        outFile << newLine << endl;
-    }
 
     outFile.close();
 }

@@ -30,7 +30,7 @@ void Doctor::display() const {
 }
 
 // Queue operations
-void Doctor::enqueue(Patient patient) {
+void Doctor::enqueue(Patient* patient) {
     if (patient_number < MAX_PATIENTS) {
         patient_queue.push(patient);
         patient_number++;
@@ -40,13 +40,13 @@ void Doctor::enqueue(Patient patient) {
     }
 }
 
-Patient Doctor::dequeue() {
+Patient* Doctor::dequeue() {
     if (patient_queue.empty()) {
         cout << "The doctor doesn't have patients to remove." << endl;
-        return Patient();  // Return a default Patient object
+        return nullptr;  // Return a default Patient object
     }
     else {
-        Patient patient = patient_queue.front();
+        Patient* patient = patient_queue.front();
         patient_queue.pop();
         patient_number--;
         return patient;

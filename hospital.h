@@ -8,17 +8,29 @@
 #include "Staff.h"
 class hospital
 {
+	DataManager& dataManager;
+
 private:
-	DataManager dataManager;
 	Doctor doctor;
-	Patient patient;
+	Patient* patient;
 	vector<string> specializations = {
-	"Cardiology","Neurology","Orthopedics","Pediatrics","Dermatology",
-	"Gastroenterology","Radiology","Oncology","Endocrinology","Nephrology",
-	"Cardiothoracic Surgery"
+		"Cardiology",
+		"Neurology",
+		"Orthopedics",
+		"Pediatrics",
+		"Dermatology",
+		"Gastroenterology",
+		"Radiology",
+		"Nephrology",
+		"Cardiothoracic Surgery",
+		"Ophthalmology",
+		"Psychiatry"
 	};
 
 public:
+	hospital(DataManager& dm) : dataManager(dm) {
+		patient= new Patient (dm);
+	}
 
 	// Add a person
 	void addPatient();

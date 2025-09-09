@@ -22,10 +22,12 @@ void displayMainMenu() {
 }
 
 int main() {
-    hospital h;
     DataManager dm;
+    hospital h(dm);
+    Patient p(dm);
     dm.loadData(); 
-
+    
+    
     int choice;
     do {
         displayMainMenu();
@@ -107,8 +109,11 @@ int main() {
             break;
         }
         case 10: {
-            cout << "Exiting system. Goodbye!" << endl;
-            break;
+            int id;
+            cout << "Enter Patient ID to search: ";
+            cin >> id;
+            p.showHistory(id);
+             break;
         }
         default: {
             cout << "Invalid choice. Please try again." << endl;
