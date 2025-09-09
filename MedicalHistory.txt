@@ -1,2 +1,0 @@
-
-PatientID:555,Time:6:20,Doctor:Dina Ali,Medicien:,panadol

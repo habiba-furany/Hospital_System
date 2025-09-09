@@ -1,47 +1,49 @@
 #include "hospital.h"
 #include "Doctor.h"
+//#include <windows.h>
 // add a patient .......
 void hospital::addPatient() {
     int age, id;
     string name;
     char gender;
-    cout << "Enter information" << endl;
-    cout << "Name : ";
+    cout << "\t\t\t\tEnter information" << endl;
+    cout << "\t\t\t\tName : ";
     /*cin >> name;*/
     cin.ignore(); // Clear input buffer
     getline(cin, name);
-    cout << "Age : ";
+    cout << "\t\t\t\tAge : ";
     cin >> age;
-    cout << "ID : ";
+    cout << "\t\t\t\tID : ";
     cin >> id;
-    cout << "Gender (M/F) : ";
+    cout << "\t\t\t\tGender (M/F) : ";
     cin >> gender;
     patient->setName(name);
     patient->setAge(age);
     patient->setId(id);
     patient->setGender(gender);
     // Assign patient to a doctor based on specialization
-    system("cls");
-    cout << "which clinic do you want to assign the patient to? "<<endl;
-    cout << "1.(Cardiology)\n";
-    cout << "2.(Neurology)\n";
-    cout << "3.(Orthopedics)\n";
-    cout << "4.(Pediatrics)\n";
-    cout << "5.(Dermatology)\n";
-    cout << "6.(Gastroenterology)\n";
-    cout << "7.(Radiology)\n";
-    cout << "8.(Nephrology)\n";
-    cout << "9.(Cardiothoracic Surgery)\n";
-    cout << "10.(Ophthalmology)\n";
-    cout << "11.(Psychiatry)\n";
-
-    cout << "Enter your choice (1-11): ";
+    system("cls");           
+    cout << "\t\t\t\twhich clinic do you want to assign the patient to? "<<endl; 
+    cout << "\t\t\t\t=============================\n";
+    cout << "\t\t\t\t1.(Cardiology)\n";
+    cout << "\t\t\t\t2.(Neurology)\n";
+    cout << "\t\t\t\t3.(Orthopedics)\n";
+    cout << "\t\t\t\t4.(Pediatrics)\n";
+    cout << "\t\t\t\t5.(Dermatology)\n";
+    cout << "\t\t\t\t6.(Gastroenterology)\n";
+    cout << "\t\t\t\t7.(Radiology)\n";
+    cout << "\t\t\t\t8.(Nephrology)\n";
+    cout << "\t\t\t\t9.(Cardiothoracic Surgery)\n";
+    cout << "\t\t\t\t10.(Ophthalmology)\n";
+    cout << "\t\t\t\t11.(Psychiatry)\n";
+    cout << "\t\t\t\t-----------------------------\n";
+    cout << "\t\t\t\tEnter your choice (1-11): ";
     int choice;
     cin >> choice;
     system("cls");
     // check if choice is valid
     if (choice < 1 || choice > 11) {
-        cout << "Invalid choice. Please select a valid clinic." << endl;
+        cout << "\t\t\t\tInvalid choice. Please select a valid clinic." << endl;
         return;
     }
 
@@ -56,19 +58,21 @@ void hospital::addPatient() {
     }
 
     if (availableDoctors.empty()) {
-        cout << "No available doctor found for the selected clinic." << endl;
+        cout << "\t\t\t\tNo available doctor found for the selected clinic." << endl;
         return;
     }
 
-    // show all available doctors to the patient can choose....
-    cout << "Available doctors:\n";
+    // show all available doctors so the patient can choose....
+    cout << "\t\t\t\tAvailable doctors:\n";
+    cout << "\t\t\t\t=============================\n";
     for (int i = 0; i < availableDoctors.size(); i++) {
-        cout << i + 1 << ". Dr. " << availableDoctors[i]->getName()
+        cout << "\t\t\t\t" << i + 1 << ". Dr. " << availableDoctors[i]->getName()
             << " (Patients: " << availableDoctors[i]->getPatient_number() << ")\n";
     }
+    cout << "\t\t\t\t=============================\n";
 
     // the patient selects a doctor ....
-    cout << "Select a doctor by number: ";
+    cout << "\t\t\t\tSelect a doctor by number: ";
     int docChoice;
     cin >> docChoice;
 
@@ -93,34 +97,34 @@ void hospital::addDoctor() {
     int id, age;
     double salary;
     char gender;
-    cout << "Enter doctor's name: ";
+    cout << "\t\t\t\tEnter doctor's name: ";
     cin.ignore(); 
     getline(cin, name);
-    cout << "Enter doctor's ID: ";
+    cout << "\t\t\t\tEnter doctor's ID: ";
     cin >> id;
-    cout << "Enter doctor's Age: ";
+    cout << "\t\t\t\tEnter doctor's Age: ";
     cin >> age;
-    cout << "Enter doctor's Gender (M/F): ";
+    cout << "\t\t\t\tEnter doctor's Gender (M/F): ";
     cin >> gender;
-    cout << "Enter doctor's specialization: " << endl;
-
+    cout << "\t\t\t\tEnter doctor's specialization: " << endl;
+    cout << "\t\t\t\t=============================\n";
     for (int i = 0; i < specializations.size(); i++) {
-        cout << i + 1 << ". " << specializations[i] << endl;
+        cout << "\t\t\t\t" << i + 1 << ". " << specializations[i] << endl;
     }
-
+    cout << "\t\t\t\t=============================\n";
     int specChoice;
-    cout << "Enter your choice (1-" << specializations.size() << "): ";
+    cout << "\t\t\t\tEnter your choice (1-" << specializations.size() << "): ";
     cin >> specChoice;
 
     if (specChoice < 1 || specChoice > specializations.size()) {
-        cout << "Invalid choice. Using default specialization (General)." << endl;
+        cout << "\t\t\t\tInvalid choice. Using default specialization (General)." << endl;
         specialization = "General";
     }
     else {
         specialization = specializations[specChoice - 1];
     }
     
-    cout << "Enter doctor's salary: ";
+    cout << "\t\t\t\tEnter doctor's salary: ";
     cin >> salary;
 
 
@@ -134,7 +138,7 @@ void hospital::addDoctor() {
 
     dataManager.listOfDoctors.push_back(d);
     dataManager.saveData();
-    cout << "Doctor added succesfully" << endl;
+    cout << "\t\t\t\tDoctor added succesfully" << endl;
 }
 
 void hospital::addStaff() {
@@ -142,19 +146,19 @@ void hospital::addStaff() {
     int id, age;
     double salary;
     char gender;
-    cout << "Enter staff's name: ";
+    cout << "\t\t\t\tEnter staff's name: ";
     cin.ignore(); 
     getline(cin, name);
-    cout << "Enter staff's ID: ";
+    cout << "\t\t\t\tEnter staff's ID: ";
     cin >> id;
-    cout << "Enter staff's Age: ";
+    cout << "\t\t\t\tEnter staff's Age: ";
     cin >> age;
-    cout << "Enter staff's Gender (M/F): ";
+    cout << "\t\t\t\tEnter staff's Gender (M/F): ";
     cin >> gender;
-    cout << "Enter staff's Position: ";
+    cout << "\t\t\t\tEnter staff's Position: ";
     cin.ignore(); 
     getline(cin, position);
-    cout << "Enter staff's salary: ";
+    cout << "\t\t\t\tEnter staff's salary: ";
     cin >> salary;
 
 
@@ -168,7 +172,9 @@ void hospital::addStaff() {
 
     dataManager.listOfStaff.push_back(s);
     dataManager.saveData();
-    cout << "Staff added Succesfully" << endl;
+    cout << "\t\t\t\t=============================\n";
+    cout << "\t\t\t\t  Staff added successfully \n";
+    cout << "\t\t\t\t=============================\n";
 }
 
 
@@ -180,12 +186,12 @@ void hospital::updatePatient(int id)
         if (patient->getId() == id)
         {
             int choice;
-            cout << "Updating information for patient ID: " << id << endl;
-            cout << "Select what you want to update:\n";
-            cout << "1. Name\n";
-            cout << "2. Age\n";
-            cout << "3. Gender\n";
-            cout << "Enter your choice (1-3): ";
+            cout << "\t\t\t\tUpdating information for patient ID: " << id << endl;
+            cout << "\t\t\t\tSelect what you want to update:\n";
+            cout << "\t\t\t\t1. Name\n";
+            cout << "\t\t\t\t2. Age\n";
+            cout << "\t\t\t\t3. Gender\n";
+            cout << "\t\t\t\tEnter your choice (1-3): ";
             cin >> choice;
 
             switch (choice)
@@ -193,41 +199,42 @@ void hospital::updatePatient(int id)
             case 1:
             {
                 string name;
-                cout << "Enter new name (current: " << patient->getName() << "): ";
+                cout << "\t\t\t\tEnter new name (current: " << patient->getName() << "): ";
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
                 std::getline(cin, name);
                 patient->setName(name);
-                cout << "Name updated successfully." << endl;
+                cout << "\t\t\t\tName updated successfully." << endl;
                 break;
             }
             case 2:
             {
                 int age;
-                cout << "Enter new age (current: " << patient->getAge() << "): ";
+                cout << "\t\t\t\tEnter new age (current: " << patient->getAge() << "): ";
                 cin >> age;
                 patient->setAge(age);
-                cout << "Age updated successfully." << endl;
+                cout << "\t\t\t\tAge updated successfully." << endl;
                 break;
             }
             case 3:
             {
                 char gender;
-                cout << "Enter new gender (current: " << patient->getGender() << "): ";
+                cout << "\t\t\t\tEnter new gender (current: " << patient->getGender() << "): ";
                 cin >> gender;
                 patient->setGender(gender);
-                cout << "Gender updated successfully." << endl;
+                cout << "\t\t\t\tGender updated successfully." << endl;
                 break;
             }
             default:
-                cout << "Invalid choice." << endl;
+                cout << "\t\t\t\tInvalid choice." << endl;
             }
             dataManager.saveData();
-            cout << "Patient updated succesfully" << endl;
+            cout << "\t\t\t\tPatient updated succesfully" << endl;
             return;
         }
     }
 
-    cout << "Patient not found." << endl;
+    cout << "\t\t\t\tPatient not found." << endl;
+    //Sleep(3000);
 }
 
 
@@ -239,14 +246,14 @@ void hospital::updateDoctor(int id)
         if (doc && doc->getId() == id)
         {
             int choice;
-            cout << "Updating information for doctor ID: " << id << endl;
-            cout << "Select what you want to update:\n";
-            cout << "1. Name\n";
-            cout << "2. Age\n";
-            cout << "3. Gender\n";
-            cout << "4. Specialization\n";
-            cout << "5. Salary\n";
-            cout << "Enter your choice (1-5): ";
+            cout << "\t\t\t\tUpdating information for doctor ID: " << id << endl;
+            cout << "\t\t\t\tSelect what you want to update:\n";
+            cout << "\t\t\t\t1. Name\n";
+            cout << "\t\t\t\t2. Age\n";
+            cout << "\t\t\t\t3. Gender\n";
+            cout << "\t\t\t\t4. Specialization\n";
+            cout << "\t\t\t\t5. Salary\n";
+            cout << "\t\t\t\tEnter your choice (1-5): ";
             cin >> choice;
 
             switch (choice)
@@ -254,59 +261,59 @@ void hospital::updateDoctor(int id)
             case 1:
             {
                 string name;
-                cout << "Enter new name (current: " << doc->getName() << "): ";
+                cout << "\t\t\t\tEnter new name (current: " << doc->getName() << "): ";
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::getline(cin, name);
                 doc->setName(name);
-                cout << "Name updated successfully." << endl;
+                cout << "\t\t\t\tName updated successfully." << endl;
                 break;
             }
             case 2:
             {
                 int age;
-                cout << "Enter new age (current: " << doc->getAge() << "): ";
+                cout << "\t\t\t\tEnter new age (current: " << doc->getAge() << "): ";
                 cin >> age;
                 doc->setAge(age);
-                cout << "Age updated successfully." << endl;
+                cout << "\t\t\t\tAge updated successfully." << endl;
                 break;
             }
             case 3:
             {
                 char gender;
-                cout << "Enter new gender (current: " << doc->getGender() << "): ";
+                cout << "\t\t\t\tEnter new gender (current: " << doc->getGender() << "): ";
                 cin >> gender;
                 doc->setGender(gender);
-                cout << "Gender updated successfully." << endl;
+                cout << "\t\t\t\tGender updated successfully." << endl;
                 break;
             }
             case 4:
             {
                 string specialization;
-                cout << "Enter new specialization (current: " << doc->getSpecialization() << "): ";
+                cout << "\t\t\t\tEnter new specialization (current: " << doc->getSpecialization() << "): ";
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::getline(cin, specialization);
                 doc->setSpecialization(specialization);
-                cout << "Specialization updated successfully." << endl;
+                cout << "\t\t\t\tSpecialization updated successfully." << endl;
                 break;
             }
             case 5:
             {
                 double salary;
-                cout << "Enter new salary (current: " << doc->getSalary() << "): ";
+                cout << "\t\t\t\tEnter new salary (current: " << doc->getSalary() << "): ";
                 cin >> salary;
                 doc->setSalary(salary);
-                cout << "Salary updated successfully." << endl;
+                cout << "\t\t\t\tSalary updated successfully." << endl;
                 break;
             }
             default:
-                cout << "Invalid choice." << endl;
+                cout << "\t\t\t\tInvalid choice." << endl;
             }
             dataManager.saveData();
-            cout << "Doctor updated succesfully" << endl;
+            cout << "\t\t\t\tDoctor updated succesfully" << endl;
             return;
         }
     }
-    cout << "Doctor not found." << endl;
+    cout << "\t\t\t\tDoctor not found." << endl;
 }
 
 
@@ -318,14 +325,14 @@ void hospital::updateStaff(int id)
         if (staff && staff->getId() == id)
         {
             int choice;
-            cout << "Updating information for staff ID: " << id << endl;
-            cout << "Select what you want to update:\n";
-            cout << "1. Name\n";
-            cout << "2. Age\n";
-            cout << "3. Gender\n";
-            cout << "4. Position\n";
-            cout << "5. Salary\n";
-            cout << "Enter your choice (1-5): ";
+            cout << "\t\t\t\tUpdating information for staff ID: " << id << endl;
+            cout << "\t\t\t\tSelect what you want to update:\n";
+            cout << "\t\t\t\t1. Name\n";
+            cout << "\t\t\t\t2. Age\n";
+            cout << "\t\t\t\t3. Gender\n";
+            cout << "\t\t\t\t4. Position\n";
+            cout << "\t\t\t\t5. Salary\n";
+            cout << "\t\t\t\tEnter your choice (1-5): ";
             cin >> choice;
 
             switch (choice)
@@ -333,59 +340,59 @@ void hospital::updateStaff(int id)
             case 1:
             {
                 string name;
-                cout << "Enter new name (current: " << staff->getName() << "): ";
+                cout << "\t\t\t\tEnter new name (current: " << staff->getName() << "): ";
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::getline(cin, name);
                 staff->setName(name);
-                cout << "Name updated successfully." << endl;
+                cout << "\t\t\t\tName updated successfully." << endl;
                 break;
             }
             case 2:
             {
                 int age;
-                cout << "Enter new age (current: " << staff->getAge() << "): ";
+                cout << "\t\t\t\tEnter new age (current: " << staff->getAge() << "): ";
                 cin >> age;
                 staff->setAge(age);
-                cout << "Age updated successfully." << endl;
+                cout << "\t\t\t\tAge updated successfully." << endl;
                 break;
             }
             case 3:
             {
                 char gender;
-                cout << "Enter new gender (current: " << staff->getGender() << "): ";
+                cout << "\t\t\t\tEnter new gender (current: " << staff->getGender() << "): ";
                 cin >> gender;
                 staff->setGender(gender);
-                cout << "Gender updated successfully." << endl;
+                cout << "\t\t\t\tGender updated successfully." << endl;
                 break;
             }
             case 4:
             {
                 string position;
-                cout << "Enter new position (current: " << staff->getPosition() << "): ";
+                cout << "\t\t\t\tEnter new position (current: " << staff->getPosition() << "): ";
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::getline(cin, position);
                 staff->setPosition(position);
-                cout << "Position updated successfully." << endl;
+                cout << "\t\t\t\tPosition updated successfully." << endl;
                 break;
             }
             case 5:
             {
                 double salary;
-                cout << "Enter new salary (current: " << staff->getSalary() << "): ";
+                cout << "\t\t\t\tEnter new salary (current: " << staff->getSalary() << "): ";
                 cin >> salary;
                 staff->setSalary(salary);
-                cout << "Salary updated successfully." << endl;
+                cout << "\t\t\t\tSalary updated successfully." << endl;
                 break;
             }
             default:
-                cout << "Invalid choice." << endl;
+                cout << "\t\t\t\tInvalid choice." << endl;
             }
             dataManager.saveData();
-            cout << "Staff updated succesfully" << endl;
+            cout << "\t\t\t\tStaff updated succesfully" << endl;
             return;
         }
     }
-    cout << "Staff not found." << endl;
+    cout << "\t\t\t\tStaff not found." << endl;
 }
 
 //search for a patient
@@ -395,12 +402,12 @@ void hospital::searchPatient(int id)
     {
         if (patient->getId() == id)
         {
-            cout << "Patient found: " << patient->getName() << endl;
+            cout << "\t\t\t\tPatient found: " << patient->getName() << endl;
             patient->display();
             return;
         }
     }
-    cout << "Patient not found." << endl;
+    cout << "\t\t\t\tPatient not found." << endl;
 }
 
 void hospital::searchEmployee(int id)
@@ -411,12 +418,12 @@ void hospital::searchEmployee(int id)
     {
         if (emp->getId() == id)
         {
-            cout << "Employee found: " << emp->getName() << endl;
+            cout << "\t\t\t\tEmployee found: " << emp->getName() << endl;
             emp->display();
             return;
         }
     }
-    cout << "Employee not found." << endl;
+    cout << "\t\t\t\tEmployee not found." << endl;
 }
 
 // Remove a patient
