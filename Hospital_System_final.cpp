@@ -1,7 +1,7 @@
 #include <iostream>
 #include "hospital.h"
 #include "DataManager.h"
-
+#include<Windows.h>
 using namespace std;
 
 void displayMainMenu() {
@@ -33,15 +33,35 @@ int main() {
 
         switch (choice) {
         case 1: {
+            system("cls");
+            cout << "*** Add Patient ***" << endl;
             h.addPatient();
+            Sleep(2000);
+            system("cls");
             break;
         }
         case 2: {
+            system("cls");
+            cout << "*** Add Doctor ***" << endl;
             h.addDoctor();
+            system("cls");
+            cout << "=============================\n";
+            cout << "  Doctor added successfully \n";
+            cout << "=============================\n";
+            Sleep(2000);
+            system("cls");
             break;
         }
         case 3: {
+            system("cls");
+            cout << "*** Add Doctor ***" << endl;
             h.addStaff();
+            system("cls");
+            cout << "=============================\n";
+            cout << "  Staff added successfully \n";
+            cout << "=============================\n";
+            Sleep(2000);
+            system("cls");
             break;
         }
         case 4: {

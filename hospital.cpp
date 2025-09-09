@@ -22,7 +22,7 @@ void hospital::addPatient() {
     p.setId(id);
     p.setGender(gender);
     // Assign patient to a doctor based on specialization
-
+    system("cls");
     cout << "which clinic do you want to assign the patient to? "<<endl;
     cout << "1.  (Cardiology)\n";
     cout << "2.  (Neurology)\n";
@@ -39,7 +39,7 @@ void hospital::addPatient() {
     cout << "Enter your choice (1-11): ";
     int choice;
     cin >> choice;
-
+    system("cls");
     // check if choice is valid
     if (choice < 1 || choice > 11) {
         cout << "Invalid choice. Please select a valid clinic." << endl;
