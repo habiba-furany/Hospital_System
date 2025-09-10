@@ -2,6 +2,9 @@
 #include "DataManager.h"
 #include "Doctor.h"
 #include <iostream>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
 using namespace std;
 Patient::Patient(string name, char gender, int age, int id, string disease, DataManager& dm)
     : Person(name, gender, age, id), dataManager(dm), disease(disease) {
@@ -22,13 +25,21 @@ void Patient::addReport(Patient* patient, Doctor* doctor) {
     string line;
     vector<string> medications;
 
-    cout << "Time: ";
+    /*cout << "Time: ";
     cin >> line;
-    string time = line;
+    string time = line;*/
 
-    cout << "Enter medications for the patient (type 'done' to finish):\n";
+    //add the current time 
+    time_t now = time(0); 
+    tm ltm;
+    localtime_s(&ltm, &now);
+    ostringstream timeStream;
+    timeStream << put_time(&ltm, "%Y-%m-%d %H:%M");  
+    string time = timeStream.str();
+
+    cout << "\t\t\t\tEnter medications for the patient (type 'done' to finish):\n";
     while (true) {
-        cout << "Medication: ";
+        cout << "\t\t\t\tMedication: ";
         cin >> line;
         if (line == "done") break;
         medications.push_back(line);
@@ -42,7 +53,7 @@ void Patient::addReport(Patient* patient, Doctor* doctor) {
         prescription += "," + med;
     }
 
-    cout << "The prescription is recorded successfully." << endl;
+    cout << "\t\t\t\tThe prescription is recorded successfully." << endl;
     dataManager.saveMedicalHistory(int(patient->getId()), prescription);
 }
 
@@ -50,10 +61,10 @@ void Patient::showHistory(int Patient_id) {
     vector<string> history = dataManager.loadMedicalHistory(Patient_id);
 
     if (history.empty()) {
-        cout << "No medical history found for patient ID: " << Patient_id << endl;
+        cout << "\t\t\t\tNo medical history found for patient ID: " << Patient_id << endl;
     }
     else {
-        cout << "Medical history for patient ID " << Patient_id << ":\n";
+        cout << "\t\t\t\tMedical history for patient ID " << Patient_id << ":\n";
         for (const auto& entry : history) {
             cout << entry << endl;
         }

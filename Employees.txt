@@ -1,1 +1,3 @@
 Doctor,487,saffa,20,F,Cardiology,302045
+Doctor,454,Mohamed Lotfy,55,M,Neurology,20000
+Staff,132,Habiba Alaa,19,F,reciptionist,15000

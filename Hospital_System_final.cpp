@@ -18,8 +18,7 @@ void displayMainMenu() {
     cout << "\t\t\t\t|  8. Search Employee\t \t  |" << endl;
     cout << "\t\t\t\t|  9. Remove Patient from Doctor  |" << endl;
     cout << "\t\t\t\t|  10. View Medical History\t  |" << endl;
-    cout << "\t\t\t\t|  11. Display All Data\t\t  |" << endl;
-    cout << "\t\t\t\t|  12. Exit\t\t\t  |" << endl;
+    cout << "\t\t\t\t|  11. Exit\t\t\t  |" << endl;
     cout << "\t\t\t\t|  =============================" << endl;
 
     cout << "\t\t\t\t  Enter your choice: ";
@@ -111,8 +110,13 @@ int main() {
             int id;
             cout << "Enter Patient ID to search: ";
             cin >> id;
-            h.searchPatient(id);
-            Sleep(2000);
+            bool found = h.searchPatient(id);
+            if (!found) {
+                cout << "\t\t\t\tPatient not found." << endl;
+            }
+            cout << "Press enter to finish" << endl;
+            cin.ignore();
+            cin.get();
             system("cls");
             break;
         }
@@ -121,7 +125,9 @@ int main() {
             cout << "Enter Employee ID to search: ";
             cin >> id;
             h.searchEmployee(id);
-            Sleep(2000);
+            cout << "Press enter to finish" << endl;
+            cin.ignore();
+            cin.get();
             system("cls");
             break;
         }
@@ -130,22 +136,28 @@ int main() {
             cout << "Enter Doctor ID to remove a patient from: ";
             cin >> docId;
             h.dequeuePatient(docId);
+            Sleep(2000);
+            system("cls");
             break;
         }
         case 10: {
             int id;
-            cout << "Enter Patient ID to search: ";
+            cout << "Enter Patient ID to view medical history: ";
             cin >> id;
             p.showHistory(id);
-            Sleep(2000);
+            cout << "Press enter to finish" << endl;
+            cin.ignore();
+            cin.get();
             system("cls");
              break;
         }
         default: {
             cout << "Invalid choice. Please try again." << endl;
+            Sleep(2000);
+            system("cls");
         }
         }
-    } while (choice != 10);
+    } while (choice != 11);
 
     return 0;
 }

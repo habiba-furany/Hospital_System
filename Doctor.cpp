@@ -42,7 +42,6 @@ void Doctor::enqueue(Patient* patient) {
 
 Patient* Doctor::dequeue() {
     if (patient_queue.empty()) {
-        cout << "The doctor doesn't have patients to remove." << endl;
         return nullptr;  // Return a default Patient object
     }
     else {

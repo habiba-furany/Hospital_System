@@ -1,26 +1,31 @@
 #include "hospital.h"
 #include "Doctor.h"
-//#include <windows.h>
+//#define WIN32_LEAN_AND_MEAN  //to avoid unneccesary includes from windows.h
+//#define NOMINMAX
+//#include<Windows.h>
 // add a patient .......
 void hospital::addPatient() {
     int age, id;
     string name;
     char gender;
     cout << "\t\t\t\tEnter information" << endl;
-    cout << "\t\t\t\tName : ";
-    /*cin >> name;*/
-    cin.ignore(); // Clear input buffer
-    getline(cin, name);
-    cout << "\t\t\t\tAge : ";
-    cin >> age;
-    cout << "\t\t\t\tID : ";
+    cout << "\t\t\t\t ID: ";
     cin >> id;
-    cout << "\t\t\t\tGender (M/F) : ";
-    cin >> gender;
-    patient->setName(name);
-    patient->setAge(age);
-    patient->setId(id);
-    patient->setGender(gender);
+    //check if patient exists or not 
+    if (!searchPatient(id)) {
+        cout << "\t\t\t\tName : ";
+        cin.ignore(); // Clear input buffer
+        getline(cin, name);
+        cout << "\t\t\t\tAge : ";
+        cin >> age;
+        cout << "\t\t\t\tGender (M/F) : ";
+        cin >> gender;
+        patient->setName(name);
+        patient->setAge(age);
+        patient->setId(id);
+        patient->setGender(gender);
+        
+    }
     // Assign patient to a doctor based on specialization
     system("cls");           
     cout << "\t\t\t\twhich clinic do you want to assign the patient to? "<<endl; 
@@ -47,7 +52,7 @@ void hospital::addPatient() {
         return;
     }
 
-
+    //search for available doctors
     string selectedSpec = specializations[choice - 1];
 
     vector<Doctor*> availableDoctors;
@@ -87,7 +92,6 @@ void hospital::addPatient() {
 
     //add patient to doctor's queue.....
     reqDoctor->enqueue(patient);
-
     dataManager.listOfPatient.push_back(patient);
     dataManager.saveData();
 }
@@ -396,7 +400,7 @@ void hospital::updateStaff(int id)
 }
 
 //search for a patient
-void hospital::searchPatient(int id)
+bool hospital::searchPatient(int id)
 {
     for (const auto& patient : dataManager.listOfPatient)
     {
@@ -404,10 +408,10 @@ void hospital::searchPatient(int id)
         {
             cout << "\t\t\t\tPatient found: " << patient->getName() << endl;
             patient->display();
-            return;
+            return true;
         }
     }
-    cout << "\t\t\t\tPatient not found." << endl;
+    return false;
 }
 
 void hospital::searchEmployee(int id)
@@ -438,9 +442,19 @@ void hospital::dequeuePatient(int Doc_ID)
             break;
         }
     }
-    Patient* patient = doctor->dequeue();
-    if (patient->getId() == 0)
+    //if the doctor not found
+
+    if (!doctor) {   
+        cout << "Doctor with ID " << Doc_ID << " not found." << endl;
         return;
+    }
+    //if there is no patients on queue
+    Patient* patient = doctor->dequeue();
+    if (!patient) { 
+        cout << "The doctor doesn't have patients to remove." << endl;
+        
+        return;
+    }
     else
     patient->addReport(patient, doctor);
 
