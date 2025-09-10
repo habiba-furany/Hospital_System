@@ -82,12 +82,12 @@ void hospital::addPatient() {
     cin >> docChoice;
 
     if (docChoice < 1 || docChoice >(int)availableDoctors.size()) {
-        cout << "Invalid choice." << endl;
+        cout << "\t\t\t\tInvalid choice." << endl;
         return;
     }
 
     Doctor* reqDoctor = availableDoctors[docChoice - 1];
-    cout << "Patient assigned to Dr. " << reqDoctor->getName()
+    cout << "\t\t\t\tPatient assigned to Dr. " << reqDoctor->getName()
         << " (" << reqDoctor->getSpecialization() << ")" << endl;
 
     //add patient to doctor's queue.....
@@ -413,13 +413,13 @@ bool hospital::searchPatient(int id)
             return true;
         }
     }
-<<<<<<< HEAD
-    cout << "\t\t\t\t----------------- " << endl;
+
+    /*cout << "\t\t\t\t----------------- " << endl;
     cout << "\t\t\t\tPatient not found." << endl;
-    cout << "\t\t\t\t----------------- " << endl;
-=======
+    cout << "\t\t\t\t----------------- " << endl;*/
+
     return false;
->>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
+
 }
 
 void hospital::searchEmployee(int id)
@@ -455,13 +455,13 @@ void hospital::dequeuePatient(int Doc_ID)
     //if the doctor not found
 
     if (!doctor) {   
-        cout << "Doctor with ID " << Doc_ID << " not found." << endl;
+        cout << "\t\t\t\tDoctor with ID " << Doc_ID << " not found." << endl;
         return;
     }
     //if there is no patients on queue
     Patient* patient = doctor->dequeue();
     if (!patient) { 
-        cout << "The doctor doesn't have patients to remove." << endl;
+        cout << "\t\t\t\tThe doctor doesn't have patients to remove." << endl;
         
         return;
     }

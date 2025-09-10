@@ -13,11 +13,8 @@ void Patient::setDisease(string d) { disease = d; }
 string Patient::getDisease() const { return disease; }
 
 void Patient::display() const {
-    cout << "\t\t\t\tinformation about Patient " << endl;
-    cout << "\t\t\t\tName is : " << name << endl;
-    cout << "\t\t\t\tGender is : " << gender << endl;
-    cout << "\t\t\t\tAge is : " << age << endl;
-    cout << "\t\t\t\tID is : " << id << endl;
+     Person::display();
+     showHistory(id);
 }
 
 void Patient::addReport(Patient* patient, Doctor* doctor) {
@@ -25,16 +22,14 @@ void Patient::addReport(Patient* patient, Doctor* doctor) {
     string line;
     vector<string> medications;
 
-<<<<<<< HEAD
-    cout << "\t\t\t\tTime: ";
-=======
-    /*cout << "Time: ";
+
+    /* cout << "\t\t\t\tTime: ";
+
+    cout << "Time: ";
 >>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
     cin >> line;
     string time = line;*/
 
-<<<<<<< HEAD
-=======
     //add the current time 
     time_t now = time(0); 
     tm ltm;
@@ -43,7 +38,7 @@ void Patient::addReport(Patient* patient, Doctor* doctor) {
     timeStream << put_time(&ltm, "%Y-%m-%d %H:%M");  
     string time = timeStream.str();
 
->>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
+
     cout << "\t\t\t\tEnter medications for the patient (type 'done' to finish):\n";
     while (true) {
         cout << "\t\t\t\tMedication: ";
@@ -64,7 +59,7 @@ void Patient::addReport(Patient* patient, Doctor* doctor) {
     dataManager.saveMedicalHistory(int(patient->getId()), prescription);
 }
 
-void Patient::showHistory(int Patient_id) {
+void Patient::showHistory(int Patient_id) const{
     vector<string> history = dataManager.loadMedicalHistory(Patient_id);
 
     if (history.empty()) {

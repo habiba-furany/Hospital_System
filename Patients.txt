@@ -1,13 +1,3 @@
 7894,marima,20,F
-<<<<<<< HEAD
-5,amer,20,M
-=======
-147,habiba,19,F
-4547,abeer mohamed,50,F
-555,jana tamer,20,F
-555,jana tamer,20,F
-656,nermen gamal,47,F
-456,jana,54,F
-456,jana,54,F
-456,jana,54,F
->>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
+345,Rahek Daly,41,F
+456,Reham Hamed,14,F

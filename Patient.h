@@ -30,7 +30,7 @@ public:
     string getDisease() const;
 
     void addReport(Patient* patient, Doctor* doctor);
-    void showHistory(int Patient_id);
+    void showHistory(int Patient_id) const;
 
     void display() const override;
 };
