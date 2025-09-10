@@ -12,11 +12,11 @@ int Person::getId()  const { return id; }
 
 void Person::display() const
 {
-	cout << "information about" << name << endl;
-	cout << "Name is : " << name << endl;
-	cout << "Gender is : " << gender << endl;
-	cout << "Age is : " << age << endl;
-	cout << "ID is : " << id << endl;
+	cout << "\t\t\t\tinformation about " << name << endl;
+	cout << "\t\t\t\tName is : " << name << endl;
+	cout << "\t\t\t\tGender is : " << gender << endl;
+	cout << "\t\t\t\tAge is : " << age << endl;
+	cout << "\t\t\t\tID is : " << id << endl;
 }
 
 Person::Person()

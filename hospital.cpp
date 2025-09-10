@@ -402,12 +402,16 @@ void hospital::searchPatient(int id)
     {
         if (patient->getId() == id)
         {
+            cout << "\t\t\t\t------------- " << endl;
             cout << "\t\t\t\tPatient found: " << patient->getName() << endl;
+            cout << "\t\t\t\t------------- " << endl;
             patient->display();
             return;
         }
     }
+    cout << "\t\t\t\t----------------- " << endl;
     cout << "\t\t\t\tPatient not found." << endl;
+    cout << "\t\t\t\t----------------- " << endl;
 }
 
 void hospital::searchEmployee(int id)
@@ -418,7 +422,9 @@ void hospital::searchEmployee(int id)
     {
         if (emp->getId() == id)
         {
+            cout << "\t\t\t\t--------------- " << endl;
             cout << "\t\t\t\tEmployee found: " << emp->getName() << endl;
+            cout << "\t\t\t\t--------------- " << endl;
             emp->display();
             return;
         }

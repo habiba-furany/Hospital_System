@@ -1,1 +1,4 @@
 Doctor,487,saffa,20,F,Cardiology,302045
+Doctor,1,Mariam,20,F,Cardiology,30000
+Doctor,2,yasmen,20,F,Neurology,20000
+Doctor,3,Roaa,20,F,Orthopedics,20000

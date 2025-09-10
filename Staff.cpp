@@ -25,5 +25,5 @@ string Staff::getPosition() const {
 // Display function
 void Staff::display() const {
     Employee::display();
-    std::cout << "Position is: " << position << endl;
+    std::cout << "\t\t\t\tPosition is: " << position << endl;
 }

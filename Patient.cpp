@@ -10,25 +10,25 @@ void Patient::setDisease(string d) { disease = d; }
 string Patient::getDisease() const { return disease; }
 
 void Patient::display() const {
-    cout << "information about Patient " << endl;
-    cout << "Name is : " << name << endl;
-    cout << "Gender is : " << gender << endl;
-    cout << "Age is : " << age << endl;
-    cout << "ID is : " << id << endl;
+    cout << "\t\t\t\tinformation about Patient " << endl;
+    cout << "\t\t\t\tName is : " << name << endl;
+    cout << "\t\t\t\tGender is : " << gender << endl;
+    cout << "\t\t\t\tAge is : " << age << endl;
+    cout << "\t\t\t\tID is : " << id << endl;
 }
 
 void Patient::addReport(Patient* patient, Doctor* doctor) {
-    cout << "Add the prescription for the patient." << endl;
+    cout << "\t\t\t\tAdd the prescription for the patient." << endl;
     string line;
     vector<string> medications;
 
-    cout << "Time: ";
+    cout << "\t\t\t\tTime: ";
     cin >> line;
     string time = line;
 
-    cout << "Enter medications for the patient (type 'done' to finish):\n";
+    cout << "\t\t\t\tEnter medications for the patient (type 'done' to finish):\n";
     while (true) {
-        cout << "Medication: ";
+        cout << "\t\t\t\tMedication: ";
         cin >> line;
         if (line == "done") break;
         medications.push_back(line);
@@ -42,7 +42,7 @@ void Patient::addReport(Patient* patient, Doctor* doctor) {
         prescription += "," + med;
     }
 
-    cout << "The prescription is recorded successfully." << endl;
+    cout << "\t\t\t\tThe prescription is recorded successfully." << endl;
     dataManager.saveMedicalHistory(int(patient->getId()), prescription);
 }
 
@@ -50,10 +50,10 @@ void Patient::showHistory(int Patient_id) {
     vector<string> history = dataManager.loadMedicalHistory(Patient_id);
 
     if (history.empty()) {
-        cout << "No medical history found for patient ID: " << Patient_id << endl;
+        cout << "\t\t\t\tNo medical history found for patient ID: " << Patient_id << endl;
     }
     else {
-        cout << "Medical history for patient ID " << Patient_id << ":\n";
+        cout << "\t\t\t\tMedical history for patient ID " << Patient_id << ":\n";
         for (const auto& entry : history) {
             cout << entry << endl;
         }

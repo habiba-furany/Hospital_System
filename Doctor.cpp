@@ -25,8 +25,8 @@ int Doctor::getPatient_number() const { return patient_number; }
 // Display function
 void Doctor::display() const {
     Employee::display();
-    cout << "Specialization is " << specialization << endl;
-    cout << "Number of patients is " << patient_number << endl;
+    cout << "\t\t\t\tSpecialization is " << specialization << endl;
+    cout << "\t\t\t\tNumber of patients is " << patient_number << endl;
 }
 
 // Queue operations
@@ -36,13 +36,13 @@ void Doctor::enqueue(Patient* patient) {
         patient_number++;
     }
     else {
-        cout << "The doctor can't take more patients." << endl;
+        cout << "\t\t\t\tThe doctor can't take more patients." << endl;
     }
 }
 
 Patient* Doctor::dequeue() {
     if (patient_queue.empty()) {
-        cout << "The doctor doesn't have patients to remove." << endl;
+        cout << "\t\t\t\tThe doctor doesn't have patients to remove." << endl;
         return nullptr;  // Return a default Patient object
     }
     else {

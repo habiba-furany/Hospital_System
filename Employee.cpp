@@ -26,5 +26,5 @@ void Employee::setSalary(double s) {
 // Display
 void Employee::display() const {
     Person::display();
-    std::cout << "Salary is " << salary << std::endl;
+    std::cout << "\t\t\t\tSalary is " << salary << std::endl;
 }

@@ -6,7 +6,7 @@ using namespace std;
 
 void displayMainMenu() {
     cout << "\t\t\t\t===================================" << endl;
-    cout << "\t\t\t\t=== Hospital Management System ===" << endl;
+    cout << "\t\t\t\t===  Hospital Management System ===" << endl;
     cout << "\t\t\t\t===================================" << endl;
     cout << "\t\t\t\t|  1. Add Patient\t\t  |" << endl;
     cout << "\t\t\t\t|  2. Add Doctor\t\t  |" << endl;
@@ -18,9 +18,8 @@ void displayMainMenu() {
     cout << "\t\t\t\t|  8. Search Employee\t \t  |" << endl;
     cout << "\t\t\t\t|  9. Remove Patient from Doctor  |" << endl;
     cout << "\t\t\t\t|  10. View Medical History\t  |" << endl;
-    cout << "\t\t\t\t|  11. Display All Data\t\t  |" << endl;
-    cout << "\t\t\t\t|  12. Exit\t\t\t  |" << endl;
-    cout << "\t\t\t\t|  =============================" << endl;
+    cout << "\t\t\t\t|  11. Exit\t\t\t  |" << endl;
+    cout << "\t\t\t\t  ===============================" << endl;
 
     cout << "\t\t\t\t  Enter your choice: ";
 }
@@ -87,8 +86,9 @@ int main() {
             break;
         }
         case 5: {
+            system("cls");
             cout << "\t\t\t\t**********************" << endl;
-            cout << "\t\t\t\t*** Update Doctor ***" << endl;
+            cout << "\t\t\t\t*** Update Doctor  ***" << endl;
             cout << "\t\t\t\t**********************" << endl;
             int id;
             cout << "\t\t\t\tEnter Doctor ID to update: ";
@@ -99,8 +99,12 @@ int main() {
             break;
         }
         case 6: {
+            system("cls");
+            cout << "\t\t\t\t********************" << endl;
+            cout << "\t\t\t\t*** Update Staff ***" << endl;
+            cout << "\t\t\t\t********************" << endl;
             int id;
-            cout << "Enter Staff ID to update: ";
+            cout << "\t\t\t\tEnter Staff ID to update: ";
             cin >> id;
             h.updateStaff(id);
             Sleep(2000);
@@ -108,44 +112,72 @@ int main() {
             break;
         }
         case 7: {
+            system("cls");
+            cout << "\t\t\t\t**********************" << endl;
+            cout << "\t\t\t\t*** Search Patient ***" << endl;
+            cout << "\t\t\t\t**********************" << endl;
             int id;
-            cout << "Enter Patient ID to search: ";
+            cout << "\t\t\t\tEnter Patient ID to search: ";
             cin >> id;
             h.searchPatient(id);
-            Sleep(2000);
-            system("cls");
+            cout << "\t\t\t\tback to main menu [Y] : ";
+            char c;
+            cin >> c;
+            if (c == 'Y' || c == 'y')system("cls");
             break;
         }
         case 8: {
+            system("cls");
+            cout << "\t\t\t\t***********************" << endl;
+            cout << "\t\t\t\t*** Search Employee ***" << endl;
+            cout << "\t\t\t\t***********************" << endl;
             int id;
-            cout << "Enter Employee ID to search: ";
+            cout << "\t\t\t\tEnter Employee ID to search: ";
             cin >> id;
             h.searchEmployee(id);
-            Sleep(2000);
-            system("cls");
+            cout << "\t\t\t\tback to main menu [Y] : ";
+            char c;
+            cin >> c;
+            if (c == 'Y' || c == 'y')system("cls");
             break;
         }
         case 9: {
+            system("cls");
+            cout << "\t\t\t\t***************" << endl;
+            cout << "\t\t\t\t*** Dequeue ***" << endl;
+            cout << "\t\t\t\t***************" << endl;
             int docId;
-            cout << "Enter Doctor ID to remove a patient from: ";
+            cout << "\t\t\t\tEnter Doctor ID to remove a patient from: ";
             cin >> docId;
             h.dequeuePatient(docId);
+            Sleep(2000);
+            system("cls");
             break;
         }
         case 10: {
+            system("cls");
+            cout << "\t\t\t\t***************" << endl;
+            cout << "\t\t\t\t*** History ***" << endl;
+            cout << "\t\t\t\t***************" << endl;
             int id;
-            cout << "Enter Patient ID to search: ";
+            cout << "\t\t\t\tEnter Patient ID to search: ";
             cin >> id;
             p.showHistory(id);
-            Sleep(2000);
-            system("cls");
+            cout << "\t\t\t\tback to main menu [Y] : ";
+            char c;
+            cin >> c;
+            if (c == 'Y' || c == 'y')system("cls");
              break;
         }
+        case 11: {
+            break;
+        }
         default: {
-            cout << "Invalid choice. Please try again." << endl;
+            system("cls");
+            cout << "\t\t\t\tInvalid choice. Please try again." << endl;
         }
         }
-    } while (choice != 10);
+    } while (choice != 11);
 
     return 0;
 }
