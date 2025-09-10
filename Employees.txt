@@ -20,6 +20,7 @@ Doctor,152,Osama Khalil,49,M,Ophthalmology,17500
 Doctor,153,Sahar Kamal,35,F,Ophthalmology,15500
 Doctor,154,Hatem Fathy,47,M,Psychiatry,16500
 Doctor,155,Nour El-Din,39,F,Psychiatry,15000
+Doctor,0,ghf,-858993460,Ì,General,-9.25596e+61
 Staff,201,Heba Ibrahim,30,F,Nurse,8000
 Staff,202,Omar Adel,45,M,Lab Technician,9000
 Staff,203,Laila Mostafa,28,F,Receptionist,6000

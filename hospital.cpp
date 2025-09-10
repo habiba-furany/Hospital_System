@@ -1,8 +1,5 @@
 #include "hospital.h"
 #include "Doctor.h"
-//#define WIN32_LEAN_AND_MEAN  //to avoid unneccesary includes from windows.h
-//#define NOMINMAX
-//#include<Windows.h>
 // add a patient .......
 void hospital::addPatient() {
     int age, id;

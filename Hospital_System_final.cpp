@@ -43,7 +43,12 @@ int main() {
             case 1: {
                 system("cls");
                 cout << "\t\t\t\t*** Add Patient ***" << endl;
-                h.addPatient();
+                try {
+                    h.addPatient();
+                }
+                catch (const exception& e) {
+                    cout << "\t\t\t\t Add Patient Error " << e.what() << endl;
+                }
                 Sleep(2000);
                 system("cls");
                 break;
@@ -51,7 +56,12 @@ int main() {
             case 2: {
                 system("cls");
                 cout << "\t\t\t\t*** Add Doctor ***" << endl;
-                h.addDoctor();
+                try {
+                    h.addDoctor();
+                }
+                catch (const exception& e) {
+                    cout << "\t\t\t\t Add Doctor Error " << e.what() << endl;
+                }
                 Sleep(2000);
                 system("cls");
                 break;
@@ -59,7 +69,12 @@ int main() {
             case 3: {
                 system("cls");
                 cout << "\t\t\t\t*** Add Staff ***" << endl;
-                h.addStaff();
+                try {
+                    h.addStaff();
+                }
+                catch (const exception& e) {
+                    cout << "\t\t\t\t Add Staff Error  " << e.what() << endl;
+                }
                 Sleep(2000);
                 system("cls");
                 break;
@@ -168,9 +183,9 @@ int main() {
             }
         }
         catch (const exception& e) {
-            cout << "\t\t\t\t[Error] " << e.what() << endl;
-            cin.clear();             
-            cin.ignore(10000, '\n'); 
+            cout << "\t\t\t\t Error  " << e.what() << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
             Sleep(2000);
             system("cls");
         }
