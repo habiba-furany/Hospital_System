@@ -2,6 +2,9 @@
 #include "DataManager.h"
 #include "Doctor.h"
 #include <iostream>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
 using namespace std;
 Patient::Patient(string name, char gender, int age, int id, string disease, DataManager& dm)
     : Person(name, gender, age, id), dataManager(dm), disease(disease) {
@@ -22,10 +25,25 @@ void Patient::addReport(Patient* patient, Doctor* doctor) {
     string line;
     vector<string> medications;
 
+<<<<<<< HEAD
     cout << "\t\t\t\tTime: ";
+=======
+    /*cout << "Time: ";
+>>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
     cin >> line;
-    string time = line;
+    string time = line;*/
 
+<<<<<<< HEAD
+=======
+    //add the current time 
+    time_t now = time(0); 
+    tm ltm;
+    localtime_s(&ltm, &now);
+    ostringstream timeStream;
+    timeStream << put_time(&ltm, "%Y-%m-%d %H:%M");  
+    string time = timeStream.str();
+
+>>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
     cout << "\t\t\t\tEnter medications for the patient (type 'done' to finish):\n";
     while (true) {
         cout << "\t\t\t\tMedication: ";

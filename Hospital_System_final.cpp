@@ -19,7 +19,11 @@ void displayMainMenu() {
     cout << "\t\t\t\t|  9. Remove Patient from Doctor  |" << endl;
     cout << "\t\t\t\t|  10. View Medical History\t  |" << endl;
     cout << "\t\t\t\t|  11. Exit\t\t\t  |" << endl;
+<<<<<<< HEAD
     cout << "\t\t\t\t  ===============================" << endl;
+=======
+    cout << "\t\t\t\t|  =============================" << endl;
+>>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
 
     cout << "\t\t\t\t  Enter your choice: ";
 }
@@ -119,11 +123,22 @@ int main() {
             int id;
             cout << "\t\t\t\tEnter Patient ID to search: ";
             cin >> id;
+<<<<<<< HEAD
             h.searchPatient(id);
             cout << "\t\t\t\tback to main menu [Y] : ";
             char c;
             cin >> c;
             if (c == 'Y' || c == 'y')system("cls");
+=======
+            bool found = h.searchPatient(id);
+            if (!found) {
+                cout << "\t\t\t\tPatient not found." << endl;
+            }
+            cout << "Press enter to finish" << endl;
+            cin.ignore();
+            cin.get();
+            system("cls");
+>>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
             break;
         }
         case 8: {
@@ -135,10 +150,17 @@ int main() {
             cout << "\t\t\t\tEnter Employee ID to search: ";
             cin >> id;
             h.searchEmployee(id);
+<<<<<<< HEAD
             cout << "\t\t\t\tback to main menu [Y] : ";
             char c;
             cin >> c;
             if (c == 'Y' || c == 'y')system("cls");
+=======
+            cout << "Press enter to finish" << endl;
+            cin.ignore();
+            cin.get();
+            system("cls");
+>>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
             break;
         }
         case 9: {
@@ -160,6 +182,7 @@ int main() {
             cout << "\t\t\t\t*** History ***" << endl;
             cout << "\t\t\t\t***************" << endl;
             int id;
+<<<<<<< HEAD
             cout << "\t\t\t\tEnter Patient ID to search: ";
             cin >> id;
             p.showHistory(id);
@@ -167,14 +190,29 @@ int main() {
             char c;
             cin >> c;
             if (c == 'Y' || c == 'y')system("cls");
+=======
+            cout << "Enter Patient ID to view medical history: ";
+            cin >> id;
+            p.showHistory(id);
+            cout << "Press enter to finish" << endl;
+            cin.ignore();
+            cin.get();
+            system("cls");
+>>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
              break;
         }
         case 11: {
             break;
         }
         default: {
+<<<<<<< HEAD
             system("cls");
             cout << "\t\t\t\tInvalid choice. Please try again." << endl;
+=======
+            cout << "Invalid choice. Please try again." << endl;
+            Sleep(2000);
+            system("cls");
+>>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
         }
         }
     } while (choice != 11);

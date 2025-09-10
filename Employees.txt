@@ -1,4 +1,9 @@
 Doctor,487,saffa,20,F,Cardiology,302045
+<<<<<<< HEAD
 Doctor,1,Mariam,20,F,Cardiology,30000
 Doctor,2,yasmen,20,F,Neurology,20000
 Doctor,3,Roaa,20,F,Orthopedics,20000
+=======
+Doctor,454,Mohamed Lotfy,55,M,Neurology,20000
+Staff,132,Habiba Alaa,19,F,reciptionist,15000
+>>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e

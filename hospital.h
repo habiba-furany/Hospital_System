@@ -44,7 +44,7 @@ public:
 
 	// Search for a person
 	void searchEmployee(int id);
-	void searchPatient(int id);
+	bool searchPatient(int id);
 
 	// Remove a patient from doctor's queue
 	void dequeuePatient(int Doc_ID);
