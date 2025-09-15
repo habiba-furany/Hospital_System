@@ -48,6 +48,8 @@ int main() {
                 }
                 catch (const exception& e) {
                     cout << "\t\t\t\t Add Patient Error " << e.what() << endl;
+                    cin.clear();
+                    cin.ignore(10000, '\n');
                 }
                 Sleep(2000);
                 system("cls");
@@ -58,9 +60,12 @@ int main() {
                 cout << "\t\t\t\t*** Add Doctor ***" << endl;
                 try {
                     h.addDoctor();
+                    cout << "\t\t\t\tDoctor added succesfully" << endl;
                 }
                 catch (const exception& e) {
                     cout << "\t\t\t\t Add Doctor Error " << e.what() << endl;
+                    cin.clear();
+                    cin.ignore(10000, '\n');
                 }
                 Sleep(2000);
                 system("cls");
@@ -71,9 +76,14 @@ int main() {
                 cout << "\t\t\t\t*** Add Staff ***" << endl;
                 try {
                     h.addStaff();
+                    cout << "\t\t\t\t=============================\n";
+                    cout << "\t\t\t\t  Staff added successfully \n";
+                    cout << "\t\t\t\t=============================\n";
                 }
                 catch (const exception& e) {
                     cout << "\t\t\t\t Add Staff Error  " << e.what() << endl;
+                    cin.clear();
+                    cin.ignore(10000, '\n');
                 }
                 Sleep(2000);
                 system("cls");
@@ -87,6 +97,7 @@ int main() {
                 cin >> id;
                 if (!cin) throw runtime_error("Invalid ID format.");
                 h.updatePatient(id);
+                cout << "\t\t\t\tPatient updated succesfully" << endl;
                 Sleep(2000);
                 system("cls");
                 break;
@@ -99,6 +110,7 @@ int main() {
                 cin >> id;
                 if (!cin) throw runtime_error("Invalid ID format.");
                 h.updateDoctor(id);
+                cout << "\t\t\t\tDoctor updated succesfully" << endl;
                 Sleep(2000);
                 system("cls");
                 break;
@@ -111,6 +123,7 @@ int main() {
                 cin >> id;
                 if (!cin) throw runtime_error("Invalid ID format.");
                 h.updateStaff(id);
+                cout << "\t\t\t\tStaff updated succesfully" << endl;
                 Sleep(2000);
                 system("cls");
                 break;
@@ -118,14 +131,13 @@ int main() {
             case 7: {
                 system("cls");
                 cout << "\t\t\t\t*** Search Patient ***" << endl;
-                int id;
-                cout << "Enter Patient ID: ";
-                cin >> id;
-                if (!cin) throw runtime_error("Invalid ID format.");
-                bool found = h.searchPatient(id);
+                string att;
+                cout << "Enter Patient Name or ID: ";
+                cin.ignore(); 
+                getline(cin, att);
+                bool found = h.searchPatient(att);
                 if (!found) cout << "Patient not found." << endl;
                 cout << "Press enter to return...";
-                cin.ignore();
                 cin.get();
                 system("cls");
                 break;
@@ -133,13 +145,12 @@ int main() {
             case 8: {
                 system("cls");
                 cout << "\t\t\t\t*** Search Employee ***" << endl;
-                int id;
-                cout << "Enter Employee ID: ";
-                cin >> id;
-                if (!cin) throw runtime_error("Invalid ID format.");
-                h.searchEmployee(id);
-                cout << "Press enter to return...";
+                string att;
+                cout << "Enter Employee Name or ID: ";
                 cin.ignore();
+                getline(cin, att);
+                h.searchEmployee(att);
+                cout << "Press enter to return...";
                 cin.get();
                 system("cls");
                 break;
@@ -163,7 +174,7 @@ int main() {
                 cout << "Enter Patient ID: ";
                 cin >> id;
                 if (!cin) throw runtime_error("Invalid ID format.");
-                if (!h.searchPatient(id)) cout << "Patient not found" << endl;
+                if (!h.searchPatient(to_string(id))) cout << "Patient not found" << endl;
                 else p.showHistory(id);
                 cout << "Press enter to return...";
                 cin.ignore();

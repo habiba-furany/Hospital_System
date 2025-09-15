@@ -43,8 +43,8 @@ public:
 	void updatePatient(int id);
 
 	// Search for a person
-	void searchEmployee(int id);
-	bool searchPatient(int id);
+	void searchEmployee(string att);
+	bool searchPatient(string att);
 
 	// Remove a patient from doctor's queue
 	void dequeuePatient(int Doc_ID);

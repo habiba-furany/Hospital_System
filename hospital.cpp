@@ -1,5 +1,9 @@
 #include "hospital.h"
 #include "Doctor.h"
+#include <string>
+#include <algorithm> // for transform
+#include <cctype>    // for tolower
+using namespace std;
 // add a patient .......
 void hospital::addPatient() {
     int age, id;
@@ -8,13 +12,15 @@ void hospital::addPatient() {
     cout << "\t\t\t\tEnter information" << endl;
     cout << "\t\t\t\t ID: ";
     cin >> id;
+    if (!cin) throw runtime_error("Invalid ID format.");
     //check if patient exists or not 
-    if (!searchPatient(id)) {
+    if (!searchPatient(to_string(id))) {
         cout << "\t\t\t\tName : ";
         cin.ignore(); // Clear input buffer
         getline(cin, name);
         cout << "\t\t\t\tAge : ";
         cin >> age;
+        if (!cin) throw runtime_error("Invalid Age format.");
         cout << "\t\t\t\tGender (M/F) : ";
         cin >> gender;
         patient->setName(name);
@@ -42,6 +48,7 @@ void hospital::addPatient() {
     cout << "\t\t\t\tEnter your choice (1-11): ";
     int choice;
     cin >> choice;
+    if (!cin) throw runtime_error("Invalid choise, please enter a number.");
     system("cls");
     // check if choice is valid
     if (choice < 1 || choice > 11) {
@@ -77,6 +84,7 @@ void hospital::addPatient() {
     cout << "\t\t\t\tSelect a doctor by number: ";
     int docChoice;
     cin >> docChoice;
+    if (!cin) throw runtime_error("Invalid choise,please enter a number.");
 
     if (docChoice < 1 || docChoice >(int)availableDoctors.size()) {
         cout << "\t\t\t\tInvalid choice." << endl;
@@ -103,8 +111,10 @@ void hospital::addDoctor() {
     getline(cin, name);
     cout << "\t\t\t\tEnter doctor's ID: ";
     cin >> id;
+    if (!cin) throw runtime_error("Invalid ID format.");
     cout << "\t\t\t\tEnter doctor's Age: ";
     cin >> age;
+    if (!cin) throw runtime_error("Invalid Age format.");
     cout << "\t\t\t\tEnter doctor's Gender (M/F): ";
     cin >> gender;
     cout << "\t\t\t\tEnter doctor's specialization: " << endl;
@@ -116,7 +126,7 @@ void hospital::addDoctor() {
     int specChoice;
     cout << "\t\t\t\tEnter your choice (1-" << specializations.size() << "): ";
     cin >> specChoice;
-
+    if (!cin) throw runtime_error("Invalid choise , please enter a number.");
     if (specChoice < 1 || specChoice > specializations.size()) {
         cout << "\t\t\t\tInvalid choice. Using default specialization (General)." << endl;
         specialization = "General";
@@ -139,7 +149,7 @@ void hospital::addDoctor() {
 
     dataManager.listOfDoctors.push_back(d);
     dataManager.saveData();
-    cout << "\t\t\t\tDoctor added succesfully" << endl;
+    
 }
 
 void hospital::addStaff() {
@@ -152,8 +162,10 @@ void hospital::addStaff() {
     getline(cin, name);
     cout << "\t\t\t\tEnter staff's ID: ";
     cin >> id;
+    if (!cin) throw runtime_error("Invalid ID format.");
     cout << "\t\t\t\tEnter staff's Age: ";
     cin >> age;
+    if (!cin) throw runtime_error("Invalid Age format.");
     cout << "\t\t\t\tEnter staff's Gender (M/F): ";
     cin >> gender;
     cout << "\t\t\t\tEnter staff's Position: ";
@@ -173,9 +185,7 @@ void hospital::addStaff() {
 
     dataManager.listOfStaff.push_back(s);
     dataManager.saveData();
-    cout << "\t\t\t\t=============================\n";
-    cout << "\t\t\t\t  Staff added successfully \n";
-    cout << "\t\t\t\t=============================\n";
+    
 }
 
 
@@ -194,7 +204,7 @@ void hospital::updatePatient(int id)
             cout << "\t\t\t\t3. Gender\n";
             cout << "\t\t\t\tEnter your choice (1-3): ";
             cin >> choice;
-
+            if (!cin) throw runtime_error("Invalid choise , please enter a number.");
             switch (choice)
             {
             case 1:
@@ -212,6 +222,7 @@ void hospital::updatePatient(int id)
                 int age;
                 cout << "\t\t\t\tEnter new age (current: " << patient->getAge() << "): ";
                 cin >> age;
+                if (!cin) throw runtime_error("Invalid Age format.");
                 patient->setAge(age);
                 cout << "\t\t\t\tAge updated successfully." << endl;
                 break;
@@ -229,7 +240,7 @@ void hospital::updatePatient(int id)
                 cout << "\t\t\t\tInvalid choice." << endl;
             }
             dataManager.saveData();
-            cout << "\t\t\t\tPatient updated succesfully" << endl;
+            
             return;
         }
     }
@@ -256,7 +267,7 @@ void hospital::updateDoctor(int id)
             cout << "\t\t\t\t5. Salary\n";
             cout << "\t\t\t\tEnter your choice (1-5): ";
             cin >> choice;
-
+            if (!cin) throw runtime_error("Invalid choise , please enter a number.");
             switch (choice)
             {
             case 1:
@@ -274,6 +285,7 @@ void hospital::updateDoctor(int id)
                 int age;
                 cout << "\t\t\t\tEnter new age (current: " << doc->getAge() << "): ";
                 cin >> age;
+                if (!cin) throw runtime_error("Invalid Age format.");
                 doc->setAge(age);
                 cout << "\t\t\t\tAge updated successfully." << endl;
                 break;
@@ -302,6 +314,7 @@ void hospital::updateDoctor(int id)
                 double salary;
                 cout << "\t\t\t\tEnter new salary (current: " << doc->getSalary() << "): ";
                 cin >> salary;
+                if (!cin) throw runtime_error("Invalid Salary format.");
                 doc->setSalary(salary);
                 cout << "\t\t\t\tSalary updated successfully." << endl;
                 break;
@@ -310,7 +323,7 @@ void hospital::updateDoctor(int id)
                 cout << "\t\t\t\tInvalid choice." << endl;
             }
             dataManager.saveData();
-            cout << "\t\t\t\tDoctor updated succesfully" << endl;
+           
             return;
         }
     }
@@ -335,7 +348,7 @@ void hospital::updateStaff(int id)
             cout << "\t\t\t\t5. Salary\n";
             cout << "\t\t\t\tEnter your choice (1-5): ";
             cin >> choice;
-
+            if (!cin) throw runtime_error("Invalid choise , please enter a number.");
             switch (choice)
             {
             case 1:
@@ -353,6 +366,7 @@ void hospital::updateStaff(int id)
                 int age;
                 cout << "\t\t\t\tEnter new age (current: " << staff->getAge() << "): ";
                 cin >> age;
+                if (!cin) throw runtime_error("Invalid Age format.");
                 staff->setAge(age);
                 cout << "\t\t\t\tAge updated successfully." << endl;
                 break;
@@ -381,6 +395,7 @@ void hospital::updateStaff(int id)
                 double salary;
                 cout << "\t\t\t\tEnter new salary (current: " << staff->getSalary() << "): ";
                 cin >> salary;
+                if (!cin) throw runtime_error("Invalid Salary format.");
                 staff->setSalary(salary);
                 cout << "\t\t\t\tSalary updated successfully." << endl;
                 break;
@@ -389,7 +404,7 @@ void hospital::updateStaff(int id)
                 cout << "\t\t\t\tInvalid choice." << endl;
             }
             dataManager.saveData();
-            cout << "\t\t\t\tStaff updated succesfully" << endl;
+            
             return;
         }
     }
@@ -397,44 +412,109 @@ void hospital::updateStaff(int id)
 }
 
 //search for a patient
-bool hospital::searchPatient(int id)
+bool hospital::searchPatient(string att)
 {
+    vector<Patient*> found;
+    // Check if att is numeric 
+    bool isNumeric = true;
+    try {
+        stoi(att);
+    }
+    catch (const exception& e) {
+        isNumeric = false;
+    }
+
     for (const auto& patient : dataManager.listOfPatient)
     {
-        if (patient->getId() == id)
-        {
-            cout << "\t\t\t\t------------- " << endl;
-            cout << "\t\t\t\tPatient found: " << patient->getName() << endl;
-            cout << "\t\t\t\t------------- " << endl;
-            patient->display();
-            return true;
+        // ID search exact match
+        if (isNumeric && patient->getId() == stoi(att)){
+            found.push_back(patient);
+        }
+        // Name search partial case insensitive match
+        else if (!isNumeric){
+            string patientName = patient->getName();
+            string searchAtt = att;
+
+            // Convert both to lowercase for case insensitive comparison
+            transform(patientName.begin(), patientName.end(), patientName.begin(), ::tolower);
+            transform(searchAtt.begin(), searchAtt.end(), searchAtt.begin(), ::tolower);
+
+            // Check if patient name contains the search string
+            if (patientName.find(searchAtt) != string::npos){
+                found.push_back(patient);
+            }
         }
     }
 
-    /*cout << "\t\t\t\t----------------- " << endl;
-    cout << "\t\t\t\tPatient not found." << endl;
-    cout << "\t\t\t\t----------------- " << endl;*/
+    if (found.empty()) {
+        return false;
 
-    return false;
-
+    }else {
+        cout << "\t\t\t\t------------- " << endl;
+        cout << "\t\t\t\t" << found.size() << " Patients found " << endl;
+        cout << "\t\t\t\t------------- " << endl;
+        for (int i = 0; i < found.size();i++) {
+            cout << "\t\t\t\tPatient number " << i + 1 << endl;
+            found[i]->display();
+            cout << "\t\t\t\t------------- " << endl;
+        }
+        return true;
+    }
 }
 
-void hospital::searchEmployee(int id)
+
+
+void hospital::searchEmployee(string att)
 {
+    vector<Employee*> found;
     dataManager.loadData();
     vector<Employee*> employees = dataManager.getEmployees();
+
+    bool isNumeric = true;
+    try {
+        stoi(att);
+    }
+    catch (const exception& e) {
+        isNumeric = false;
+    }
+
     for (const auto& emp : employees)
     {
-        if (emp->getId() == id)
-        {
-            cout << "\t\t\t\t--------------- " << endl;
-            cout << "\t\t\t\tEmployee found: " << emp->getName() << endl;
-            cout << "\t\t\t\t--------------- " << endl;
-            emp->display();
-            return;
+        // ID search exact match
+        if (isNumeric && emp->getId() == stoi(att)) {
+            found.push_back(emp);
+        }
+        // Name search partial case insensitive match
+        else if (!isNumeric) {
+            string empName = emp->getName();
+            string searchAtt = att;
+
+            // Convert both to lowercase for case insensitive comparison
+            transform(empName.begin(), empName.end(), empName.begin(), ::tolower);
+            transform(searchAtt.begin(), searchAtt.end(), searchAtt.begin(), ::tolower);
+
+            // Check if patient name contains the search string
+            if (empName.find(searchAtt) != string::npos) {
+                found.push_back(emp);
+            }
         }
     }
-    cout << "\t\t\t\tEmployee not found." << endl;
+
+    if (found.empty()) {
+        cout << "\t\t\t\tEmployee not found." << endl;
+        return;
+
+    }else {
+        cout << "\t\t\t\t------------- " << endl;
+        cout << "\t\t\t\t" << found.size() << " Employees found " << endl;
+        cout << "\t\t\t\t------------- " << endl;
+        for (int i = 0; i < found.size();i++) {
+            cout << "\t\t\t\tEmployee number " << i + 1 << endl;
+            found[i]->display();
+            cout << "\t\t\t\t------------- " << endl;
+        }
+        return;
+    }
 }
 
 // Remove a patient

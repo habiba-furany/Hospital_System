@@ -14,7 +14,6 @@ string Patient::getDisease() const { return disease; }
 
 void Patient::display() const {
      Person::display();
-     showHistory(id);
 }
 
 void Patient::addReport(Patient* patient, Doctor* doctor) {
