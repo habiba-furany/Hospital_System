@@ -67,7 +67,8 @@ void Patient::showHistory(int Patient_id) const{
     else {
         cout << "\t\t\t\tMedical history for patient ID " << Patient_id << ":\n";
         for (const auto& entry : history) {
-            cout << entry << endl;
+            cout << "\t\t\t\t" << entry << endl;
+            cout << endl;
         }
     }
 }

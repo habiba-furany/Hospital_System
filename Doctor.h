@@ -25,8 +25,11 @@ public:
     // Setters & Getters
     void setSpecialization(string spec);
     void setPatient_number(int n);
+    void setQueue(queue<Patient*> qu);
     string getSpecialization() const;
     int getPatient_number() const;
+    queue<Patient*> getQueue() const;
+    
 
     // Display function
     void display() const override;
@@ -38,5 +41,7 @@ public:
     // Appointment scheduling
     // must for organizing patient ....
     bool Appointments();
+
+    
 
 };

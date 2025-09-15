@@ -13,21 +13,11 @@ class hospital
 private:
 	Doctor doctor;
 	Patient* patient;
-	vector<string> specializations = {
-		"Cardiology",
-		"Neurology",
-		"Orthopedics",
-		"Pediatrics",
-		"Dermatology",
-		"Gastroenterology",
-		"Radiology",
-		"Nephrology",
-		"Cardiothoracic Surgery",
-		"Ophthalmology",
-		"Psychiatry"
-	};
+	
 
 public:
+	vector<string> specializations = dataManager.loadSpecializations();
+
 	hospital(DataManager& dm) : dataManager(dm) {
 		patient= new Patient (dm);
 	}
@@ -49,5 +39,7 @@ public:
 	// Remove a patient from doctor's queue
 	void dequeuePatient(int Doc_ID);
 
+	// for adding a new clinic (Specialization).
+	bool addClinic(string nameClinic);
 };
 

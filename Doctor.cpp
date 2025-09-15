@@ -17,10 +17,12 @@ Doctor::~Doctor() {}
 // Setters
 void Doctor::setSpecialization(string spec) { specialization = spec; }
 void Doctor::setPatient_number(int n) { patient_number = n; }
+void Doctor::setQueue(queue<Patient*> qu) { patient_queue = qu; }
 
 // Getters
 string Doctor::getSpecialization() const { return specialization; }
 int Doctor::getPatient_number() const { return patient_number; }
+queue<Patient*> Doctor::getQueue() const { return patient_queue; }
 
 // Display function
 void Doctor::display() const {
@@ -28,6 +30,7 @@ void Doctor::display() const {
     cout << "\t\t\t\tSpecialization is " << specialization << endl;
     cout << "\t\t\t\tNumber of patients is " << patient_number << endl;
 }
+
 
 // Queue operations
 void Doctor::enqueue(Patient* patient) {
@@ -59,4 +62,7 @@ bool Doctor::Appointments() {
     }
     return false;
 }
+
+
+
 

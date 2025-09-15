@@ -24,4 +24,12 @@ public:
     // very important for getting medical history easily
     vector<string> loadMedicalHistory(int patientId);
     void saveMedicalHistory(int patientId, string history);
+
+    // important for Updating Clinics easily
+    vector<string> loadSpecializations();
+    void saveSpecializations(const vector<string>& specs);
+
+    //for knoming appointments for every doctor...
+    void saveCurrentPatients(const vector<Doctor*>& doctors);
+    void loadCurrentPatients(vector<Doctor*>& doctors, vector<Patient*>& patients);
 };

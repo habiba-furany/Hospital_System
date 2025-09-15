@@ -21,8 +21,21 @@ void hospital::addPatient() {
         cout << "\t\t\t\tAge : ";
         cin >> age;
         if (!cin) throw runtime_error("Invalid Age format.");
-        cout << "\t\t\t\tGender (M/F) : ";
-        cin >> gender;
+       
+        while (true) {
+            cout << "\t\t\t\tGender (M/F) : ";
+            cin >> gender;
+
+            gender = toupper(gender);
+
+            if (gender == 'M' || gender == 'F') {
+                break;
+            }
+            else {
+                cout << "\t\t\t\tInvalid input! Please enter M or F only.\n";
+                cin.clear(); 
+            }
+        }
         patient->setName(name);
         patient->setAge(age);
         patient->setId(id);
@@ -31,27 +44,18 @@ void hospital::addPatient() {
     }
     // Assign patient to a doctor based on specialization
     system("cls");           
-    cout << "\t\t\t\twhich clinic do you want to assign the patient to? "<<endl; 
-    cout << "\t\t\t\t=============================\n";
-    cout << "\t\t\t\t1.(Cardiology)\n";
-    cout << "\t\t\t\t2.(Neurology)\n";
-    cout << "\t\t\t\t3.(Orthopedics)\n";
-    cout << "\t\t\t\t4.(Pediatrics)\n";
-    cout << "\t\t\t\t5.(Dermatology)\n";
-    cout << "\t\t\t\t6.(Gastroenterology)\n";
-    cout << "\t\t\t\t7.(Radiology)\n";
-    cout << "\t\t\t\t8.(Nephrology)\n";
-    cout << "\t\t\t\t9.(Cardiothoracic Surgery)\n";
-    cout << "\t\t\t\t10.(Ophthalmology)\n";
-    cout << "\t\t\t\t11.(Psychiatry)\n";
-    cout << "\t\t\t\t-----------------------------\n";
-    cout << "\t\t\t\tEnter your choice (1-11): ";
+    int i = 1;
+    for (auto& spec : specializations) {
+        cout <<"\t\t\t\t"<<i << "." << spec << "." << endl;
+        i++;
+    }
+    cout << "\t\t\t\tEnter your choice (1- "<<(i - 1) <<"):";
     int choice;
     cin >> choice;
     if (!cin) throw runtime_error("Invalid choise, please enter a number.");
     system("cls");
     // check if choice is valid
-    if (choice < 1 || choice > 11) {
+    if (choice < 1 || choice > (i-1)) {
         cout << "\t\t\t\tInvalid choice. Please select a valid clinic." << endl;
         return;
     }
@@ -545,6 +549,18 @@ void hospital::dequeuePatient(int Doc_ID)
     else
     patient->addReport(patient, doctor);
 
+}
+// for adding a new clinc (Specialization).
+bool hospital::addClinic(string nameClinic) {
+
+    for (const auto& spec : specializations) {
+        if (spec == nameClinic) {
+            return false; 
+        }
+    }
+    specializations.push_back(nameClinic);
+    dataManager.saveSpecializations(specializations);
+    return true;
 }
 
 

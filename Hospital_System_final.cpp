@@ -18,7 +18,8 @@ void displayMainMenu() {
     cout << "\t\t\t\t|  8. Search Employee\t \t  |" << endl;
     cout << "\t\t\t\t|  9. Remove Patient from Doctor  |" << endl;
     cout << "\t\t\t\t| 10. View Medical History\t  |" << endl;
-    cout << "\t\t\t\t| 11. Exit\t\t\t  |" << endl;
+    cout << "\t\t\t\t| 11. Add Specialization\t  |" << endl;
+    cout << "\t\t\t\t| 12. Exit\t\t\t  |" << endl;
     cout << "\t\t\t\t===================================" << endl;
     cout << "\t\t\t\t  ===============================" << endl;
     cout << "\t\t\t\t  Enter your choice: ";
@@ -29,6 +30,7 @@ int main() {
     hospital h(dm);
     Patient p(dm);
     dm.loadData();
+    dm.loadCurrentPatients(dm.listOfDoctors, dm.listOfPatient);
 
     int choice;
     do {
@@ -183,6 +185,31 @@ int main() {
                 break;
             }
             case 11: {
+                system("cls");
+
+                string nameOfClinic;
+                cout << "\t\t\t\tEnter The name of the clinic: ";
+                getline(cin >> ws, nameOfClinic);
+
+                if (h.addClinic(nameOfClinic)) {
+                    cout << "\t\t\t\tUpdated Specializations:\n";
+                    for (auto& spec : h.specializations) {
+                        cout << "\t\t\t\t- " << spec << endl;
+                    }
+                    cout << "\t\t\t\tClinic added successfully.\n";
+                }
+                else {
+
+                    cout << "\t\t\t\tClinic already exists.\n";
+                }
+
+                cout << "Press enter to return...";
+                cin.get();
+                system("cls");
+                break;
+
+            }
+            case 12: {
                 cout << "\t\t\t\tExiting system, Good Bye!" << endl;
                 break;
             }
@@ -200,7 +227,8 @@ int main() {
             Sleep(2000);
             system("cls");
         }
-    } while (choice != 11);
+    } while (choice != 12);
+    dm.saveCurrentPatients(dm.listOfDoctors);
 
     return 0;
 }

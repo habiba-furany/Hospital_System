@@ -38,7 +38,7 @@ void DataManager::loadData() {
         while (getline(EmpFile, line)) {
             stringstream ss(line);
             string type, temp, name,text;
-            int id, age;
+            int id, age, patientNum = 0;
             char gender;
             double salary;
 
@@ -49,13 +49,14 @@ void DataManager::loadData() {
             getline(ss, temp, ','); gender = temp[0];
             getline(ss, text, ',');
             getline(ss, temp, ','); salary = stod(temp);
-
+            getline(ss, temp, ','); patientNum = stoi(temp);
             // check the type of employee....
             if (type == "Doctor") {
                 Doctor* d = new Doctor();
                 d->setId(id); d->setName(name); d->setAge(age);
                 d->setGender(gender); d->setSpecialization(text);
                 d->setSalary(salary);
+                d->setPatient_number(patientNum);
                 listOfDoctors.push_back(d);
             }
             else if (type == "Staff") {
@@ -91,7 +92,7 @@ void DataManager::saveData() {
         for (const auto& d : listOfDoctors) {
             EmpFile << "Doctor," << d->getId() << "," << d->getName() << ","
                 << d->getAge() << "," << d->getGender() << ","
-                << d->getSpecialization() << "," << d->getSalary() << endl;
+                << d->getSpecialization() << "," << d->getSalary() << "," << d->getPatient_number() << endl;
         }
         for (const auto& s : listOfStaff) {
             EmpFile << "Staff," << s->getId() << "," << s->getName() << ","
@@ -170,4 +171,86 @@ void DataManager::saveMedicalHistory(int patientId, string history) {
 
 
     outFile.close();
+}
+void DataManager::saveSpecializations(const vector<string>& specs) {
+    ofstream out("specializations.txt");
+    for (auto& s : specs) {
+        out << s << endl;
+    }
+    out.close();
+}
+
+vector<string> DataManager::loadSpecializations() {
+    vector<string> specs;
+    ifstream in("specializations.txt");
+    string line;
+    while (getline(in, line)) {
+        if (!line.empty())
+            specs.push_back(line);
+    }
+    in.close();
+    return specs;
+}
+
+
+void DataManager::saveCurrentPatients(const vector<Doctor*>& doctors) {
+    ofstream file("CurrentPatients.txt");
+    if (!file) {
+        cerr << "Error opening CurrentPatients.txt for writing.\n";
+        return;
+    }
+
+    for (const auto& d : doctors) {
+        if (!d) continue;
+        queue<Patient*> tempQueue = d->getQueue();
+        while (!tempQueue.empty()) {
+            Patient* p = tempQueue.front();
+            tempQueue.pop();
+            file << d->getId() << "," << p->getId() << "\n";
+        }
+    }
+
+    file.close();
+}
+
+
+void DataManager::loadCurrentPatients(vector<Doctor*>& doctors, vector<Patient*>& patients) {
+    ifstream file("CurrentPatients.txt");
+    if (!file) {
+        cerr << "No CurrentPatients.txt found. Starting with empty queues.\n";
+        return;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string docIdStr, patIdStr;
+        getline(ss, docIdStr, ',');
+        getline(ss, patIdStr, ',');
+
+        int docId = stoi(docIdStr);
+        int patId = stoi(patIdStr);
+
+        Doctor* doctor = nullptr;
+        for (auto& d : doctors) {
+            if (d && d->getId() == docId) {
+                doctor = d;
+                break;
+            }
+        }
+
+        Patient* patient = nullptr;
+        for (auto& p : patients) {
+            if (p && p->getId() == patId) {
+                patient = p;
+                break;
+            }
+        }
+
+        if (doctor && patient) {
+            doctor->enqueue(patient);
+        }
+    }
+
+    file.close();
 }
