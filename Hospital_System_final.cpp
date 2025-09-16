@@ -21,7 +21,6 @@ void displayMainMenu() {
     cout << "\t\t\t\t| 11. Add Specialization\t  |" << endl;
     cout << "\t\t\t\t| 12. Exit\t\t\t  |" << endl;
     cout << "\t\t\t\t===================================" << endl;
-    cout << "\t\t\t\t  ===============================" << endl;
     cout << "\t\t\t\t  Enter your choice: ";
 }
 
@@ -134,12 +133,12 @@ int main() {
                 system("cls");
                 cout << "\t\t\t\t*** Search Patient ***" << endl;
                 string att;
-                cout << "Enter Patient Name or ID: ";
+                cout << "\t\t\t\tEnter Patient Name or ID: ";
                 cin.ignore(); 
                 getline(cin, att);
                 bool found = h.searchPatient(att);
-                if (!found) cout << "Patient not found." << endl;
-                cout << "Press enter to return...";
+                if (!found) cout << "\t\t\t\tPatient not found." << endl;
+                cout << "\t\t\t\tPress enter to return...";
                 cin.get();
                 system("cls");
                 break;
@@ -148,11 +147,11 @@ int main() {
                 system("cls");
                 cout << "\t\t\t\t*** Search Employee ***" << endl;
                 string att;
-                cout << "Enter Employee Name or ID: ";
+                cout << "\t\t\t\tEnter Employee Name or ID: ";
                 cin.ignore();
                 getline(cin, att);
                 h.searchEmployee(att);
-                cout << "Press enter to return...";
+                cout << "\t\t\t\tPress enter to return...";
                 cin.get();
                 system("cls");
                 break;
@@ -161,7 +160,7 @@ int main() {
                 system("cls");
                 cout << "\t\t\t\t*** Dequeue Patient ***" << endl;
                 int docId;
-                cout << "Enter Doctor ID: ";
+                cout << "\t\t\t\tEnter Doctor ID: ";
                 cin >> docId;
                 if (!cin) throw runtime_error("Invalid ID format.");
                 h.dequeuePatient(docId);
@@ -173,12 +172,12 @@ int main() {
                 system("cls");
                 cout << "\t\t\t\t*** View Medical History ***" << endl;
                 int id;
-                cout << "Enter Patient ID: ";
+                cout << "\t\t\t\tEnter Patient ID: ";
                 cin >> id;
                 if (!cin) throw runtime_error("Invalid ID format.");
-                if (!h.searchPatient(to_string(id))) cout << "Patient not found" << endl;
+                if (!h.searchPatient(to_string(id))) cout << "\t\t\t\tPatient not found" << endl;
                 else p.showHistory(id);
-                cout << "Press enter to return...";
+                cout << "\t\t\t\tPress enter to return...";
                 cin.ignore();
                 cin.get();
                 system("cls");
@@ -203,7 +202,7 @@ int main() {
                     cout << "\t\t\t\tClinic already exists.\n";
                 }
 
-                cout << "Press enter to return...";
+                cout << "\t\t\t\tPress enter to return...";
                 cin.get();
                 system("cls");
                 break;

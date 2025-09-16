@@ -1,4 +1,4 @@
-Doctor,134,Hossam Farouk,52,M,Cardiology,20000,0
+Doctor,134,Hossam Farouk,52,M,Cardiology,20000,1
 Doctor,135,Nadia Nabil,41,F,Cardiology,15500,0
 Doctor,136,Youssef Gamal,39,M,Neurology,17000,0
 Doctor,137,Dina Ahmed,44,F,Neurology,16500,1
