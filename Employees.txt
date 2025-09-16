@@ -1,4 +1,4 @@
-Doctor,134,Hossam Farouk,52,M,Cardiology,20000,1
+Doctor,134,Hossam Farouk,52,M,Dental,20000,1
 Doctor,135,Nadia Nabil,41,F,Cardiology,15500,0
 Doctor,136,Youssef Gamal,39,M,Neurology,17000,0
 Doctor,137,Dina Ahmed,44,F,Neurology,16500,1
@@ -11,7 +11,7 @@ Doctor,143,Shimaa Adel,37,F,Dermatology,15500,0
 Doctor,144,Samir Nassar,55,M,Gastroenterology,18000,0
 Doctor,145,Noha Mostafa,40,F,Gastroenterology,16000,0
 Doctor,146,Walid Hassan,46,M,Radiology,17000,0
-Doctor,147,Heba Farid,38,F,Radiology,15000,0
+Doctor,147,Heba Farid,38,F,Radiology,15000,1
 Doctor,148,Adel Mounir,53,M,Nephrology,19000,0
 Doctor,149,Rania Hafez,36,F,Nephrology,15000,0
 Doctor,150,Magdy Sherif,60,M,Cardiothoracic Surgery,23000,1

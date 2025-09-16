@@ -21,14 +21,6 @@ void Patient::addReport(Patient* patient, Doctor* doctor) {
     string line;
     vector<string> medications;
 
-
-    /* cout << "\t\t\t\tTime: ";
-
-    cout << "Time: ";
->>>>>>> e29fa8e2a7b8b8dbef75808ae3325f397587285e
-    cin >> line;
-    string time = line;*/
-
     //add the current time 
     time_t now = time(0); 
     tm ltm;

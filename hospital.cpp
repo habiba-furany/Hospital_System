@@ -4,38 +4,84 @@
 #include <algorithm> // for transform
 #include <cctype>    // for tolower
 using namespace std;
+
+//validate the intger input
+int hospital::getInt(string prompt) {
+    int value;
+    while (true) {  
+        cout << prompt;
+        cin >> value;
+        //stop if the input is valid
+        if (cin) return value;
+
+        cin.clear();       // clear the invalid input
+        cin.ignore(1000, '\n');
+        cout << "\t\t\t\tInvalid input! Please enter a number.\n";
+    } //keep asking for the input it is not valid
+}
+
+ //validate the double input
+double hospital::getDouble(string prompt) {
+    double value;
+    while (true) {
+        cout << prompt;
+        cin >> value;
+        //stop if the input is valid
+        if (cin) return value;
+
+        cin.clear();     // clear the invalid input
+        cin.ignore(1000, '\n');
+        cout << "\t\t\t\tInvalid input! Please enter a valid number.\n";
+    }//keep asking for the input it is not valid
+}
+
+ //validate the gender input
+char hospital::getGender(string prompt) {
+    char gender;
+    while (true) {
+        cout << prompt;
+        cin >> gender;
+        gender = toupper(gender); //accept lower & upper case
+
+        //stop if the input is valid
+        if (gender == 'M' || gender == 'F') return gender;
+
+        cout << "\t\t\t\tInvalid input! Please enter M or F only.\n";
+    }//keep asking for the input it is not valid
+}
+
+int hospital::choiseRange(int a, int b , string prompt) {
+    int choice;
+
+    while (true) {
+        //get the choise
+        choice = getInt(prompt);
+
+        //stop if the input in range
+        if (choice >= a && choice <= b) return choice;
+        
+        cout << "\t\t\t\tInvalid choice.Enter a number between "<< a <<" and "<< b <<endl;
+
+    }//keep asking for the input it is not valid
+}
+
 // add a patient .......
 void hospital::addPatient() {
     int age, id;
     string name;
     char gender;
     cout << "\t\t\t\tEnter information" << endl;
-    cout << "\t\t\t\t ID: ";
-    cin >> id;
-    if (!cin) throw runtime_error("Invalid ID format.");
-    //check if patient exists or not 
+
+    id=getInt( "\t\t\t\tID: ");
+    
+    //add a new patient if it is not exist 
     if (!searchPatient(to_string(id))) {
         cout << "\t\t\t\tName : ";
         cin.ignore(); // Clear input buffer
         getline(cin, name);
-        cout << "\t\t\t\tAge : ";
-        cin >> age;
-        if (!cin) throw runtime_error("Invalid Age format.");
-       
-        while (true) {
-            cout << "\t\t\t\tGender (M/F) : ";
-            cin >> gender;
+        age=getInt( "\t\t\t\tAge : ");
+        gender = getGender("\t\t\t\tGender (M/F) : ");
 
-            gender = toupper(gender);
-
-            if (gender == 'M' || gender == 'F') {
-                break;
-            }
-            else {
-                cout << "\t\t\t\tInvalid input! Please enter M or F only.\n";
-                cin.clear(); 
-            }
-        }
         patient->setName(name);
         patient->setAge(age);
         patient->setId(id);
@@ -49,16 +95,8 @@ void hospital::addPatient() {
         cout <<"\t\t\t\t"<<i << "." << spec << "." << endl;
         i++;
     }
-    cout << "\t\t\t\tEnter your choice (1- "<<(i - 1) <<"):";
-    int choice;
-    cin >> choice;
-    if (!cin) throw runtime_error("Invalid choise, please enter a number.");
+    int choice = choiseRange(1,i-1,"\t\t\t\tEnter your choice (1- " + to_string (i - 1) + "):");
     system("cls");
-    // check if choice is valid
-    if (choice < 1 || choice > (i-1)) {
-        cout << "\t\t\t\tInvalid choice. Please select a valid clinic." << endl;
-        return;
-    }
 
     //search for available doctors
     string selectedSpec = specializations[choice - 1];
@@ -85,15 +123,8 @@ void hospital::addPatient() {
     cout << "\t\t\t\t=============================\n";
 
     // the patient selects a doctor ....
-    cout << "\t\t\t\tSelect a doctor by number: ";
-    int docChoice;
-    cin >> docChoice;
-    if (!cin) throw runtime_error("Invalid choise,please enter a number.");
-
-    if (docChoice < 1 || docChoice >(int)availableDoctors.size()) {
-        cout << "\t\t\t\tInvalid choice." << endl;
-        return;
-    }
+   
+    int docChoice= choiseRange(1, (int)availableDoctors.size(),"\t\t\t\tSelect a doctor by number: ");
 
     Doctor* reqDoctor = availableDoctors[docChoice - 1];
     cout << "\t\t\t\tPatient assigned to Dr. " << reqDoctor->getName()
@@ -113,35 +144,23 @@ void hospital::addDoctor() {
     cout << "\t\t\t\tEnter doctor's name: ";
     cin.ignore(); 
     getline(cin, name);
-    cout << "\t\t\t\tEnter doctor's ID: ";
-    cin >> id;
-    if (!cin) throw runtime_error("Invalid ID format.");
-    cout << "\t\t\t\tEnter doctor's Age: ";
-    cin >> age;
-    if (!cin) throw runtime_error("Invalid Age format.");
-    cout << "\t\t\t\tEnter doctor's Gender (M/F): ";
-    cin >> gender;
+    id = getInt("\t\t\t\tEnter doctor's ID: ");
+    age=getInt( "\t\t\t\tEnter doctor's Age: ");
+    gender= getGender( "\t\t\t\tEnter doctor's Gender (M/F): ");
+
     cout << "\t\t\t\tEnter doctor's specialization: " << endl;
     cout << "\t\t\t\t=============================\n";
     for (int i = 0; i < specializations.size(); i++) {
         cout << "\t\t\t\t" << i + 1 << ". " << specializations[i] << endl;
     }
     cout << "\t\t\t\t=============================\n";
-    int specChoice;
-    cout << "\t\t\t\tEnter your choice (1-" << specializations.size() << "): ";
-    cin >> specChoice;
-    if (!cin) throw runtime_error("Invalid choise , please enter a number.");
-    if (specChoice < 1 || specChoice > specializations.size()) {
-        cout << "\t\t\t\tInvalid choice. Using default specialization (General)." << endl;
-        specialization = "General";
-    }
-    else {
-        specialization = specializations[specChoice - 1];
-    }
+    int specChoice = choiseRange(1, specializations.size(),
+        "\t\t\t\tEnter your choice (1-" + to_string(specializations.size()) + "): ");
     
-    cout << "\t\t\t\tEnter doctor's salary: ";
-    cin >> salary;
-
+     specialization = specializations[specChoice - 1];
+    
+    salary=getDouble( "\t\t\t\tEnter doctor's salary: ");
+   
 
     Doctor* d = new Doctor();
     d->setName(name);
@@ -164,20 +183,13 @@ void hospital::addStaff() {
     cout << "\t\t\t\tEnter staff's name: ";
     cin.ignore(); 
     getline(cin, name);
-    cout << "\t\t\t\tEnter staff's ID: ";
-    cin >> id;
-    if (!cin) throw runtime_error("Invalid ID format.");
-    cout << "\t\t\t\tEnter staff's Age: ";
-    cin >> age;
-    if (!cin) throw runtime_error("Invalid Age format.");
-    cout << "\t\t\t\tEnter staff's Gender (M/F): ";
-    cin >> gender;
+    id=getInt( "\t\t\t\tEnter staff's ID: ");
+    age=getInt( "\t\t\t\tEnter staff's Age: ");
+    gender=getGender( "\t\t\t\tEnter staff's Gender (M/F): ");
     cout << "\t\t\t\tEnter staff's Position: ";
     cin.ignore(); 
     getline(cin, position);
-    cout << "\t\t\t\tEnter staff's salary: ";
-    cin >> salary;
-
+    salary=getDouble( "\t\t\t\tEnter staff's salary: ");
 
     Staff* s = new Staff();
     s->setName(name);
@@ -206,16 +218,16 @@ void hospital::updatePatient(int id)
             cout << "\t\t\t\t1. Name\n";
             cout << "\t\t\t\t2. Age\n";
             cout << "\t\t\t\t3. Gender\n";
-            cout << "\t\t\t\tEnter your choice (1-3): ";
-            cin >> choice;
-            if (!cin) throw runtime_error("Invalid choise , please enter a number.");
+
+            choice = choiseRange(1, 3, "\t\t\t\tEnter your choice (1-3): ");
+            
             switch (choice)
             {
             case 1:
             {
                 string name;
                 cout << "\t\t\t\tEnter new name (current: " << patient->getName() << "): ";
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+                cin.ignore(); // Clear input buffer
                 std::getline(cin, name);
                 patient->setName(name);
                 cout << "\t\t\t\tName updated successfully." << endl;
@@ -223,20 +235,13 @@ void hospital::updatePatient(int id)
             }
             case 2:
             {
-                int age;
-                cout << "\t\t\t\tEnter new age (current: " << patient->getAge() << "): ";
-                cin >> age;
-                if (!cin) throw runtime_error("Invalid Age format.");
-                patient->setAge(age);
+                int age = getInt("\t\t\t\tEnter new age (current: " + to_string(patient->getAge() )+ "): ");
                 cout << "\t\t\t\tAge updated successfully." << endl;
                 break;
             }
             case 3:
             {
-                char gender;
-                cout << "\t\t\t\tEnter new gender (current: " << patient->getGender() << "): ";
-                cin >> gender;
-                patient->setGender(gender);
+                char gender = getGender("\t\t\t\tEnter new gender (current: " +to_string( patient->getGender())+ "): ");
                 cout << "\t\t\t\tGender updated successfully." << endl;
                 break;
             }
@@ -250,7 +255,7 @@ void hospital::updatePatient(int id)
     }
 
     cout << "\t\t\t\tPatient not found." << endl;
-    //Sleep(3000);
+   
 }
 
 
@@ -261,7 +266,7 @@ void hospital::updateDoctor(int id)
     {
         if (doc && doc->getId() == id)
         {
-            int choice;
+            
             cout << "\t\t\t\tUpdating information for doctor ID: " << id << endl;
             cout << "\t\t\t\tSelect what you want to update:\n";
             cout << "\t\t\t\t1. Name\n";
@@ -269,56 +274,56 @@ void hospital::updateDoctor(int id)
             cout << "\t\t\t\t3. Gender\n";
             cout << "\t\t\t\t4. Specialization\n";
             cout << "\t\t\t\t5. Salary\n";
-            cout << "\t\t\t\tEnter your choice (1-5): ";
-            cin >> choice;
-            if (!cin) throw runtime_error("Invalid choise , please enter a number.");
+
+            int choice= choiseRange(1,5, "\t\t\t\tEnter your choice (1-5): ");
+            
             switch (choice)
             {
             case 1:
             {
                 string name;
                 cout << "\t\t\t\tEnter new name (current: " << doc->getName() << "): ";
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::getline(cin, name);
+                cin.ignore();
+                getline(cin, name);
                 doc->setName(name);
                 cout << "\t\t\t\tName updated successfully." << endl;
                 break;
             }
             case 2:
             {
-                int age;
-                cout << "\t\t\t\tEnter new age (current: " << doc->getAge() << "): ";
-                cin >> age;
-                if (!cin) throw runtime_error("Invalid Age format.");
+                int age = getInt("\t\t\t\tEnter new age (current: " +to_string( doc->getAge()) + "): ");
                 doc->setAge(age);
                 cout << "\t\t\t\tAge updated successfully." << endl;
                 break;
             }
             case 3:
             {
-                char gender;
-                cout << "\t\t\t\tEnter new gender (current: " << doc->getGender() << "): ";
-                cin >> gender;
+                char gender = getGender("\t\t\t\tEnter new gender (current: " +to_string( doc->getGender())+ "): ");
                 doc->setGender(gender);
                 cout << "\t\t\t\tGender updated successfully." << endl;
                 break;
             }
             case 4:
             {
-                string specialization;
-                cout << "\t\t\t\tEnter new specialization (current: " << doc->getSpecialization() << "): ";
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::getline(cin, specialization);
+                cout << "\t\t\t\tSelect new specialization (current: " << doc->getSpecialization() << "): "<<endl;
+                for (int i = 0; i < specializations.size(); i++) {
+                    cout << "\t\t\t\t" << i + 1 << ". " << specializations[i] << endl;
+                }
+
+                int specChoice = choiseRange(1, specializations.size(),
+                    "\t\t\t\tEnter your choice (1-" + to_string(specializations.size()) + "): ");
+
+                string specialization = specializations[specChoice - 1];
+
+
                 doc->setSpecialization(specialization);
                 cout << "\t\t\t\tSpecialization updated successfully." << endl;
                 break;
             }
             case 5:
             {
-                double salary;
-                cout << "\t\t\t\tEnter new salary (current: " << doc->getSalary() << "): ";
-                cin >> salary;
-                if (!cin) throw runtime_error("Invalid Salary format.");
+                double salary= getDouble( "\t\t\t\tEnter new salary (current: " +to_string( doc->getSalary())+ "): ");
+                
                 doc->setSalary(salary);
                 cout << "\t\t\t\tSalary updated successfully." << endl;
                 break;
@@ -342,7 +347,6 @@ void hospital::updateStaff(int id)
     {
         if (staff && staff->getId() == id)
         {
-            int choice;
             cout << "\t\t\t\tUpdating information for staff ID: " << id << endl;
             cout << "\t\t\t\tSelect what you want to update:\n";
             cout << "\t\t\t\t1. Name\n";
@@ -350,36 +354,32 @@ void hospital::updateStaff(int id)
             cout << "\t\t\t\t3. Gender\n";
             cout << "\t\t\t\t4. Position\n";
             cout << "\t\t\t\t5. Salary\n";
-            cout << "\t\t\t\tEnter your choice (1-5): ";
-            cin >> choice;
-            if (!cin) throw runtime_error("Invalid choise , please enter a number.");
+
+            int choice= choiseRange(1,5, "\t\t\t\tEnter your choice (1-5): ");
+            
             switch (choice)
             {
             case 1:
             {
                 string name;
                 cout << "\t\t\t\tEnter new name (current: " << staff->getName() << "): ";
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::getline(cin, name);
+                cin.ignore();
+                getline(cin, name);
                 staff->setName(name);
                 cout << "\t\t\t\tName updated successfully." << endl;
                 break;
             }
             case 2:
             {
-                int age;
-                cout << "\t\t\t\tEnter new age (current: " << staff->getAge() << "): ";
-                cin >> age;
-                if (!cin) throw runtime_error("Invalid Age format.");
+                int age= getInt( "\t\t\t\tEnter new age (current: " +to_string(staff->getAge())+ "): ");
+                
                 staff->setAge(age);
                 cout << "\t\t\t\tAge updated successfully." << endl;
                 break;
             }
             case 3:
             {
-                char gender;
-                cout << "\t\t\t\tEnter new gender (current: " << staff->getGender() << "): ";
-                cin >> gender;
+                char gender = getGender( "\t\t\t\tEnter new gender (current: " +to_string( staff->getGender() )+ "): ");
                 staff->setGender(gender);
                 cout << "\t\t\t\tGender updated successfully." << endl;
                 break;
@@ -388,18 +388,16 @@ void hospital::updateStaff(int id)
             {
                 string position;
                 cout << "\t\t\t\tEnter new position (current: " << staff->getPosition() << "): ";
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::getline(cin, position);
+                cin.ignore();
+                getline(cin, position);
                 staff->setPosition(position);
                 cout << "\t\t\t\tPosition updated successfully." << endl;
                 break;
             }
             case 5:
             {
-                double salary;
-                cout << "\t\t\t\tEnter new salary (current: " << staff->getSalary() << "): ";
-                cin >> salary;
-                if (!cin) throw runtime_error("Invalid Salary format.");
+                double salary = getDouble( "\t\t\t\tEnter new salary (current: " +to_string( staff->getSalary()) + "): ");
+                
                 staff->setSalary(salary);
                 cout << "\t\t\t\tSalary updated successfully." << endl;
                 break;

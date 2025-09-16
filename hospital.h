@@ -41,5 +41,11 @@ public:
 
 	// for adding a new clinic (Specialization).
 	bool addClinic(string nameClinic);
+
+	// input validation
+	int getInt(string prompt);
+	double getDouble(string prompt);
+	char getGender(string prompt);
+	int choiseRange(int a, int b, string prompt);
 };
 

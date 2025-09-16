@@ -37,7 +37,7 @@ int main() {
             displayMainMenu();
             cin >> choice;
             if (!cin) {
-                throw runtime_error("Invalid input. Please enter a number.");
+                throw runtime_error("\t\t\t\tInvalid input. Please enter a number.");
             }
 
             switch (choice) {
@@ -93,10 +93,7 @@ int main() {
             case 4: {
                 system("cls");
                 cout << "\t\t\t\t*** Update Patient ***" << endl;
-                int id;
-                cout << "Enter Patient ID: ";
-                cin >> id;
-                if (!cin) throw runtime_error("Invalid ID format.");
+                int id = h.getInt("\t\t\t\tEnter Patient ID: ");
                 h.updatePatient(id);
                 cout << "\t\t\t\tPatient updated succesfully" << endl;
                 Sleep(2000);
@@ -106,10 +103,7 @@ int main() {
             case 5: {
                 system("cls");
                 cout << "\t\t\t\t*** Update Doctor ***" << endl;
-                int id;
-                cout << "Enter Doctor ID: ";
-                cin >> id;
-                if (!cin) throw runtime_error("Invalid ID format.");
+                int id = h.getInt("\t\t\t\tEnter Doctor ID: ");
                 h.updateDoctor(id);
                 cout << "\t\t\t\tDoctor updated succesfully" << endl;
                 Sleep(2000);
@@ -119,10 +113,7 @@ int main() {
             case 6: {
                 system("cls");
                 cout << "\t\t\t\t*** Update Staff ***" << endl;
-                int id;
-                cout << "Enter Staff ID: ";
-                cin >> id;
-                if (!cin) throw runtime_error("Invalid ID format.");
+                int id = h.getInt("\t\t\t\tEnter Staff ID: ");
                 h.updateStaff(id);
                 cout << "\t\t\t\tStaff updated succesfully" << endl;
                 Sleep(2000);
@@ -159,10 +150,7 @@ int main() {
             case 9: {
                 system("cls");
                 cout << "\t\t\t\t*** Dequeue Patient ***" << endl;
-                int docId;
-                cout << "\t\t\t\tEnter Doctor ID: ";
-                cin >> docId;
-                if (!cin) throw runtime_error("Invalid ID format.");
+                int docId = h.getInt("\t\t\t\tEnter Doctor ID: ");
                 h.dequeuePatient(docId);
                 Sleep(2000);
                 system("cls");
@@ -171,10 +159,7 @@ int main() {
             case 10: {
                 system("cls");
                 cout << "\t\t\t\t*** View Medical History ***" << endl;
-                int id;
-                cout << "\t\t\t\tEnter Patient ID: ";
-                cin >> id;
-                if (!cin) throw runtime_error("Invalid ID format.");
+                int id = h.getInt("\t\t\t\tEnter Patient ID: ");
                 if (!h.searchPatient(to_string(id))) cout << "\t\t\t\tPatient not found" << endl;
                 else p.showHistory(id);
                 cout << "\t\t\t\tPress enter to return...";
@@ -220,7 +205,7 @@ int main() {
             }
         }
         catch (const exception& e) {
-            cout << "\t\t\t\t Error  " << e.what() << endl;
+            cout << "\t\t\t\tError  " << e.what() << endl;
             cin.clear();
             cin.ignore(10000, '\n');
             Sleep(2000);

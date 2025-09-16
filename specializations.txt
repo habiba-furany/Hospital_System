@@ -9,3 +9,4 @@ Nephrology
 Cardiothoracic Surgery
 Ophthalmology
 Psychiatry
+Dental
