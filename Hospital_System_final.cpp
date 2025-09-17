@@ -25,6 +25,7 @@ void displayMainMenu() {
 }
 
 int main() {
+
     DataManager dm;
     hospital h(dm);
     Patient p(dm);

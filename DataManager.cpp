@@ -20,6 +20,9 @@ void DataManager::loadData() {
 
         string line;
         while (getline(inFile, line)) {
+            // Skip empty lines
+            if (line.empty()) continue;
+
             stringstream ss(line);
             Patient* p = new Patient(*this);
             string temp;

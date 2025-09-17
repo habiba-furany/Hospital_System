@@ -143,12 +143,18 @@
     <ClInclude Include="hospital.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Staff.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="CurrentPatients.txt" />
     <Text Include="Employees.txt" />
     <Text Include="MedicalHistory.txt" />
     <Text Include="Patients.txt" />
+    <Text Include="specializations.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Hospital_System_final.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

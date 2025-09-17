@@ -134,6 +134,7 @@ void hospital::addPatient() {
     reqDoctor->enqueue(patient);
     dataManager.listOfPatient.push_back(patient);
     dataManager.saveData();
+    dataManager.saveCurrentPatients(dataManager.listOfDoctors);
 }
 
 void hospital::addDoctor() {

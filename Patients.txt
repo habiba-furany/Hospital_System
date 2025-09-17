@@ -1,8 +1,4 @@
-7894,marima,20,F
-345,Rahek Daly,0,F
-456,Reham Hamed,14,F
-1239,Amal Ragab,14,F
-148,amal,15,M
-159,Amal,20,M
-1,mariam,20,M
 123,Habiba Alaa,19,F
+777,Jana Mohamed,15,F
+789,Mohamed Ahmed,55,M
+4567,Rahek Maged,47,F

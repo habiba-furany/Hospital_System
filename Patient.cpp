@@ -30,10 +30,11 @@ void Patient::addReport(Patient* patient, Doctor* doctor) {
     string time = timeStream.str();
 
 
+    cin.ignore();
     cout << "\t\t\t\tEnter medications for the patient (type 'done' to finish):\n";
     while (true) {
-        cout << "\t\t\t\tMedication: ";
-        cin >> line;
+        cout << "\t\t\t\tMedication: "; 
+        getline(cin, line);
         if (line == "done") break;
         medications.push_back(line);
     }
