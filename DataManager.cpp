@@ -151,25 +151,13 @@ vector<string> DataManager::loadMedicalHistory(int patientId) {
 
 
 void DataManager::saveMedicalHistory(int patientId, string history) {
-    vector<string> allLines;
-    ifstream inFile("MedicalHistory.txt");
-    if (inFile) {
-        string line;
-        while (getline(inFile, line)) {
-            allLines.push_back(line);
-        }
-        inFile.close();
-    }
+    ofstream outFile("MedicalHistory.txt", ios::app);
 
-    ofstream outFile("MedicalHistory.txt", ios::app); 
     if (!outFile) {
         cerr << "Error opening MedicalHistory.txt" << endl;
         return;
     }
-
     outFile << history << endl;
-
-
     outFile.close();
 }
 void DataManager::saveSpecializations(const vector<string>& specs) {
@@ -196,7 +184,7 @@ vector<string> DataManager::loadSpecializations() {
 void DataManager::saveCurrentPatients(const vector<Doctor*>& doctors) {
     ofstream file("CurrentPatients.txt");
     if (!file) {
-        cerr << "Error opening CurrentPatients.txt for writing.\n";
+        cerr << "Error opening CurrentPatients.\n";
         return;
     }
 
@@ -217,7 +205,7 @@ void DataManager::saveCurrentPatients(const vector<Doctor*>& doctors) {
 void DataManager::loadCurrentPatients(vector<Doctor*>& doctors, vector<Patient*>& patients) {
     ifstream file("CurrentPatients.txt");
     if (!file) {
-        cerr << "No CurrentPatients.txt found. Starting with empty queues.\n";
+        cerr << "No CurrentPatients.txt found.\n";
         return;
     }
 
@@ -225,11 +213,8 @@ void DataManager::loadCurrentPatients(vector<Doctor*>& doctors, vector<Patient*>
     while (getline(file, line)) {
         stringstream ss(line);
         string docIdStr, patIdStr;
-        getline(ss, docIdStr, ',');
-        getline(ss, patIdStr, ',');
-
-        int docId = stoi(docIdStr);
-        int patId = stoi(patIdStr);
+        getline(ss, docIdStr, ',');        int docId = stoi(docIdStr);
+        getline(ss, patIdStr, ',');        int patId = stoi(patIdStr);
 
         Doctor* doctor = nullptr;
         for (auto& d : doctors) {
