@@ -197,6 +197,9 @@ void DataManager::saveCurrentPatients(const vector<Doctor*>& doctors) {
         while (!tempQueue.empty()) {
             Patient* p = tempQueue.front();
             tempQueue.pop();
+            cout << "Reading doctor ID: " << d->getId() << ", patient ID: " << p->getId() << endl;
+            if (d) cout << "Doctor found.\n";
+            if (p) cout << "Patient found.\n";
             file << d->getId() << "," << p->getId() << "\n";
         }
     }
@@ -234,7 +237,9 @@ void DataManager::loadCurrentPatients(vector<Doctor*>& doctors, vector<Patient*>
                 break;
             }
         }
-
+        cout << "Reading doctor ID: " << docId << ", patient ID: " << patId << endl;
+        if (doctor) cout << "Doctor found.\n";
+        if (patient) cout << "Patient found.\n";
         if (doctor && patient) {
             doctor->enqueue(patient);
         }

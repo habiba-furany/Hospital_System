@@ -546,6 +546,7 @@ void hospital::dequeuePatient(int Doc_ID)
     }
     else
     patient->addReport(patient, doctor);
+    dataManager.saveData();
 
 }
 // for adding a new clinc (Specialization).

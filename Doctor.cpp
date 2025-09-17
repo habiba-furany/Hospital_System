@@ -21,7 +21,7 @@ void Doctor::setQueue(queue<Patient*> qu) { patient_queue = qu; }
 
 // Getters
 string Doctor::getSpecialization() const { return specialization; }
-int Doctor::getPatient_number() const { return patient_number; }
+int Doctor::getPatient_number() const { return  patient_queue.size(); }
 queue<Patient*> Doctor::getQueue() const { return patient_queue; }
 
 // Display function
