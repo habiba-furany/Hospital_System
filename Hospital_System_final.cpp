@@ -213,6 +213,7 @@ int main() {
             system("cls");
         }
     } while (choice != 12);
+    dm.saveData();
     dm.saveCurrentPatients(dm.listOfDoctors);
 
     return 0;

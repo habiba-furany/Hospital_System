@@ -67,15 +67,13 @@ int hospital::choiseRange(int a, int b , string prompt) {
 
 // add a patient .......
 void hospital::addPatient() {
+    Patient* patient = new Patient(dataManager);
     int age, id;
     string name;
     char gender;
     cout << "\t\t\t\tEnter information" << endl;
 
-    id=getInt( "\t\t\t\tID: ");
-    
-    //add a new patient if it is not exist 
-    if (!searchPatient(to_string(id))) {
+        id=getInt( "\t\t\t\tID: ");
         cout << "\t\t\t\tName : ";
         cin.ignore(); // Clear input buffer
         getline(cin, name);
@@ -87,7 +85,7 @@ void hospital::addPatient() {
         patient->setId(id);
         patient->setGender(gender);
         
-    }
+    
     // Assign patient to a doctor based on specialization
     system("cls");           
     int i = 1;
@@ -133,8 +131,7 @@ void hospital::addPatient() {
     //add patient to doctor's queue.....
     reqDoctor->enqueue(patient);
     dataManager.listOfPatient.push_back(patient);
-    dataManager.saveData();
-    dataManager.saveCurrentPatients(dataManager.listOfDoctors);
+
 }
 
 void hospital::addDoctor() {
@@ -237,12 +234,14 @@ void hospital::updatePatient(int id)
             case 2:
             {
                 int age = getInt("\t\t\t\tEnter new age (current: " + to_string(patient->getAge() )+ "): ");
+                patient->setAge(age);
                 cout << "\t\t\t\tAge updated successfully." << endl;
                 break;
             }
             case 3:
             {
                 char gender = getGender("\t\t\t\tEnter new gender (current: " +to_string( patient->getGender())+ "): ");
+                patient->setGender(gender);
                 cout << "\t\t\t\tGender updated successfully." << endl;
                 break;
             }

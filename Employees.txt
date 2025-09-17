@@ -1,26 +1,26 @@
 Doctor,134,Hossam Farouk,52,M,Dental,20000,0
 Doctor,135,Nadia Nabil,41,F,Cardiology,15500,0
-Doctor,136,Youssef Gamal,39,M,Neurology,17000,0
+Doctor,136,Youssef Gamal,39,M,Neurology,17000,2
 Doctor,137,Dina Ahmed,44,F,Neurology,16500,0
 Doctor,138,Hany Magdy,50,M,Orthopedics,18000,0
 Doctor,139,Salma Ibrahim,36,F,Orthopedics,16000,0
-Doctor,140,Ali Hussein,42,M,Pediatrics,15000,1
+Doctor,140,Ali Hussein,42,M,Pediatrics,15000,0
 Doctor,141,Mai El-Sayed,34,F,Pediatrics,14500,0
-Doctor,142,Karim Lotfy,48,M,Dermatology,17500,0
+Doctor,142,Karim Lotfy,48,M,Dermatology,17500,2
 Doctor,143,Shimaa Adel,37,F,Dermatology,15500,0
 Doctor,144,Samir Nassar,55,M,Gastroenterology,18000,0
 Doctor,145,Noha Mostafa,40,F,Gastroenterology,16000,0
-Doctor,146,Walid Hassan,46,M,Radiology,17000,0
+Doctor,146,Walid Hassan,46,M,Radiology,17000,2
 Doctor,147,Heba Farid,38,F,Radiology,15000,0
 Doctor,148,Adel Mounir,53,M,Nephrology,19000,0
 Doctor,149,Rania Hafez,36,F,Nephrology,15000,0
-Doctor,150,Magdy Sherif,60,M,Cardiothoracic Surgery,23000,0
+Doctor,150,Magdy Sherif,60,M,Cardiothoracic Surgery,23000,1
 Doctor,151,Yasmin Fekry,43,F,Cardiothoracic Surgery,20000,0
 Doctor,152,Osama Khalil,49,M,Ophthalmology,17500,0
 Doctor,153,Sahar Kamal,35,F,Ophthalmology,15500,0
 Doctor,154,Hatem Fathy,47,M,Psychiatry,16500,0
 Doctor,155,Nour El-Din,39,F,Psychiatry,15000,0
-Doctor,7894,Mohamed Adel,77,M,Dental,14000,3
+Doctor,7894,Mohamed Adel,77,M,Dental,14000,0
 Staff,201,Heba Ibrahim,30,F,Nurse,8000
 Staff,202,Omar Adel,45,M,Lab Technician,9000
 Staff,203,Laila Mostafa,28,F,Receptionist,6000

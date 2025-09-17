@@ -16,10 +16,11 @@ private:
 	
 
 public:
-	vector<string> specializations = dataManager.loadSpecializations();
+	vector<string> specializations;
 
 	hospital(DataManager& dm) : dataManager(dm) {
 		patient= new Patient (dm);
+		specializations = dataManager.loadSpecializations();
 	}
 
 	// Add a person

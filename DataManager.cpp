@@ -217,7 +217,7 @@ void DataManager::loadCurrentPatients(vector<Doctor*>& doctors, vector<Patient*>
         stringstream ss(line);
         string docIdStr, patIdStr;
         getline(ss, docIdStr, ',');        int docId = stoi(docIdStr);
-        getline(ss, patIdStr, ',');        int patId = stoi(patIdStr);
+        getline(ss, patIdStr);        int patId = stoi(patIdStr);
 
         Doctor* doctor = nullptr;
         for (auto& d : doctors) {
