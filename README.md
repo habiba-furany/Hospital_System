@@ -16,30 +16,30 @@ Oriented Programming (OOP) principles. It aims to simulate how a hospital system
 
 🛠️ Technologies
 
-*C++
+* C++
 
-*Object-Oriented Programming (OOP)
+* Object-Oriented Programming (OOP)
 
-*File Handling (TXT files)
+* File Handling (TXT files)
 
 
 📂 Project Structure
 
-*Hospital.h / .cpp: Core hospital logic.
+* Hospital.h / .cpp: Core hospital logic.
 
-*Patient.h / .cpp: Patient details and history.
+* Patient.h / .cpp: Patient details and history.
 
-*Doctor.h / .cpp: Doctor information and specialties.
+* Doctor.h / .cpp: Doctor information and specialties.
 
-*Employee / Staff: Other staff data.
+* Employee / Staff: Other staff data.
 
-*MedicalHistory.txt: Stores patient history records.
+* MedicalHistory.txt: Stores patient history records.
 
 
 🚀 Future Enhancements
 
-*Add a GUI interface (e.g., Qt or JavaFX).
+* Add a GUI interface (e.g., Qt or JavaFX).
 
-*Use a database (MySQL / SQLite) instead of text files.
+* Use a database (MySQL / SQLite) instead of text files.
 
-*Add reporting features (daily/weekly statistics).
+* Add reporting features (daily/weekly statistics).
